@@ -1,9 +1,16 @@
 <script lang="ts">
   import "../app.css";
   import Nav from "$lib/components/Nav.svelte";
+
+  import { dev } from "$app/environment";
+  import { inject } from "@vercel/analytics";
+
+  inject({ mode: dev ? "development" : "production" });
 </script>
 
-<main class="px-72 dark:bg-zinc-700 p-44 bg-zinc-100">
+<main
+  class="h-auto px-4 py-24 sm:px-16 lg:p-36 lg:px-52 dark:bg-zinc-700 bg-zinc-100"
+>
   <Nav />
   <slot />
 </main>
