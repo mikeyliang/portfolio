@@ -4,17 +4,11 @@
     IconBrandLinkedin,
     IconBrandGithubFilled,
     IconBrandInstagram,
-    IconSchool,
-    IconChargingPile,
   } from "@tabler/icons-svelte";
 
   import Tag from "$lib/components/Tag.svelte";
   import Clock from "$lib/components/Clock.svelte";
   import Card from "$lib/components/Card.svelte";
-
-  import dog1 from "$lib/assets/dog1.jpg";
-  import cat1 from "$lib/assets/cat1.jpg";
-  import rabbit1 from "$lib/assets/rabbit1.jpg";
 
   import type { ProjectCategory, ProjectType } from "$lib/types/projects.type";
 
