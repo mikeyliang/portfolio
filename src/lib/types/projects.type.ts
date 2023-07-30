@@ -8,7 +8,7 @@ export type ProjectType =
   | "Electrical"; // Color: bg-orange-400 (Orange)
 
 // Define a function to map ProjectTag to corresponding bg_color and txt_color
-export function getTypeColor(tag: ProjectType) {
+export function getTypeColor(tag: string) {
   switch (tag) {
     case "Art":
       return { bg_color: "bg-red-100", txt_color: "text-red-400" };
@@ -21,6 +21,6 @@ export function getTypeColor(tag: ProjectType) {
     case "Electrical":
       return { bg_color: "bg-purple-100", txt_color: "text-purple-400" };
     default:
-      return { bg_color: "bg-gray-100", txt_color: "text-gray-400" };
+      return { bg_color: "bg-gray-100", txt_color: "text-gray-00" };
   }
 }

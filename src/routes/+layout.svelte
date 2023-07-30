@@ -8,9 +8,7 @@
   inject({ mode: dev ? "development" : "production" });
 </script>
 
-<main
-  class="h-auto px-4 py-24 sm:px-16 lg:p-36 lg:px-52 dark:bg-zinc-700 bg-zinc-100"
->
+<main class="h-auto px-4 py-24 sm:px-16 lg:p-52 lg:px-52 dark:bg-zinc-700">
   <Nav />
   <slot />
 </main>

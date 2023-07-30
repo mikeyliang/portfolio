@@ -4,6 +4,8 @@
     IconBrandLinkedin,
     IconBrandGithubFilled,
     IconBrandInstagram,
+    IconCircleFilled,
+    IconCircleCheckFilled,
   } from "@tabler/icons-svelte";
 
   import Tag from "$lib/components/Tag.svelte";
@@ -14,18 +16,44 @@
 
   import type { PageData } from "./$types";
   export let data: PageData;
-  let projectTypes = [
-    ...(new Set(
-      data?.projects?.flatMap((project) => project.type) as
-        | ProjectType[]
-        | undefined
-    ) ?? []),
-  ];
+
+  let typeOptions = ["Art", "Design", "Software", "Mechanical", "Electrical"];
+
+  let typeFilter = [...typeOptions];
+
+  function toggleTypeFilter(category: string) {
+    if (category === "All") {
+      typeFilter =
+        typeFilter.length === typeOptions.length ? [] : [...typeOptions];
+    } else {
+      if (typeFilter.includes(category)) {
+        typeFilter = typeFilter.filter((c) => c !== category);
+      } else {
+        typeFilter = [...typeFilter, category];
+      }
+
+      if (
+        typeOptions
+          .filter((c) => c !== "All")
+          .every((opt) => typeFilter.includes(opt))
+      ) {
+        typeFilter = [...typeFilter, "All"];
+      } else {
+        typeFilter = typeFilter.filter((c) => c !== "All");
+      }
+    }
+  }
+
+  $: filteredProjects = data.projects?.filter(
+    (project) =>
+      typeFilter.includes("All") ||
+      project.type.every((opt) => typeFilter.includes(opt))
+  );
 </script>
 
 <div class="flex flex-col items-center justify-center gap-6">
   <div
-    class="flex flex-col gap-12 p-8 bg-white border lg:gap-24 sm:p-16 rounded-3xl"
+    class="flex flex-col w-full gap-12 p-8 bg-white border lg:gap-24 sm:p-16 rounded-3xl"
   >
     <div
       class="flex flex-col-reverse items-start justify-between gap-4 lg:flex-row lg:gap-0"
@@ -99,32 +127,55 @@
         >My works:</span
       >
       <div class="flex flex-row flex-wrap items-center justify-start gap-2">
-        {#each ["All", "Art", "Design", "Software", "Mechanical", "Electrical"] as category}
-          <button>
-            <Tag><span class="text-sm line-through">{category}</span></Tag>
-          </button>
+        <button on:click={() => toggleTypeFilter("All")}>
+          {#if typeFilter.length === typeOptions.length}
+            <Tag>
+              <div class="flex flex-row items-center justify-center gap-1">
+                <IconCircleCheckFilled class="p-0.5 text-zinc-600" />
+                <span class="text-sm">All</span>
+              </div>
+            </Tag>
+          {:else}
+            <Tag>
+              <div class="flex flex-row items-center justify-center gap-1">
+                <IconCircleFilled class="p-0.5 text-zinc-600" />
+                <span class="text-sm">All</span>
+              </div>
+            </Tag>
+          {/if}
+        </button>
+        {#each typeOptions as category}
+          {#if category !== "All"}
+            <button on:click={() => toggleTypeFilter(category)}>
+              <Tag>
+                <div class="flex flex-row items-center justify-center gap-1">
+                  <svelte:component
+                    this={typeFilter.includes(category)
+                      ? IconCircleCheckFilled
+                      : IconCircleFilled}
+                    class="p-0.5 text-zinc-600"
+                  />
+                  <span class="text-sm">{category}</span>
+                </div>
+              </Tag>
+            </button>
+          {/if}
         {/each}
       </div>
     </div>
   </div>
   <div
-    class="grid grid-flow-row-dense grid-cols-1 mx-auto sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-6"
+    class="grid w-full grid-flow-row-dense grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-6"
   >
-    {#if data.projects}
-      {#each data.projects as project}
-        {#if project.img}
-          <div class="w-full col-span-1">
-            <Card
-              types={projectTypes}
-              id={project.id}
-              date={project.projectTime}
-            >
-              <div class="cursor-pointer vignette">
-                <img class=" rounded-4xl" src={project.img} alt="dog1" />
-              </div>
-            </Card>
-          </div>
-        {/if}
+    {#if filteredProjects}
+      {#each filteredProjects as project}
+        <div class="w-full col-span-1">
+          <Card types={project.type} id={project.id} date={project.projectTime}>
+            <div class="cursor-pointer vignette">
+              <img class="rounded-4xl" src={project.img} alt={project.name} />
+            </div>
+          </Card>
+        </div>
       {/each}
     {/if}
   </div>

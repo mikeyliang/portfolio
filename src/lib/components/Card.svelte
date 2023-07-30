@@ -5,14 +5,16 @@
 
   export let id: number;
   export let date: string | null;
-  export let types: ProjectType[];
+  export let types: string[];
 </script>
 
-<div class="relative flex flex-col w-auto gap-24 bg-white border rounded-3xl">
-  <span class="absolute z-10 text-xs font-medium top-4 left-6 text-zinc-600"
+<div
+  class="relative flex flex-col w-full gap-24 bg-white border max-w-fit rounded-3xl"
+>
+  <span class="absolute z-10 text-xs font-medium top-4 left-6 text-zinc-500"
     >{`ID ${id}`}</span
   >
-  <span class="absolute z-10 text-xs font-medium top-4 right-6 text-zinc-600"
+  <span class="absolute z-10 text-xs font-medium top-4 right-6 text-zinc-500"
     >{date}</span
   >
   {#if types && types.length > 0}
