@@ -1,0 +1,29 @@
+[
+    {
+        "type": [
+            "Art"
+        ],
+        "name": "Dodo Drawing 1",
+        "description": "sketch of dodo",
+        "img": "https://i.imgur.com/E9f12gz.jpg",
+        "date": "11/13/22"
+    },
+    {
+        "type": [
+            "Art"
+        ],
+        "name": "Rabbit Drawing 1",
+        "description": "sketch of rabbits",
+        "img": "https://i.imgur.com/ZmADncl.jpg",
+        "date": "11/18/22"
+    },
+    {
+        "type": [
+            "Art"
+        ],
+        "name": "Cat Drawing 1",
+        "description": "sketch of cats",
+        "img": "https://i.imgur.com/QYGEDjn.jpg",
+        "date": "11/28/22"
+    }
+]
