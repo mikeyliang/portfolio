@@ -60,8 +60,6 @@ export default function Home() {
       const response = await fetch("/api/project");
       const projects = await response.json();
 
-      console.log(projects?.data);
-
       setFilteredProjects(
         projects?.data.filter(
           (project: Project) =>
@@ -104,7 +102,7 @@ export default function Home() {
 
             <div className="flex flex-col items-end gap-2 md:flex-row">
               <p className="text-4xl font-extrabold sm:text-5xl text-zinc-700">
-                👋🏻 hi there! it's michael ✌🏻
+                👋🏻 hi there! it&apos;s michael ✌🏻
               </p>
             </div>
             <div className="flex flex-row gap-3">
@@ -190,7 +188,7 @@ export default function Home() {
         {filteredProjects &&
           filteredProjects.map((project) => {
             return (
-              <div className="w-full col-span-1">
+              <div key={project.name} className="w-full col-span-1">
                 <style jsx>
                   {`
                     .vignette {

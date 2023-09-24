@@ -31,7 +31,9 @@ export default function Card<T extends { toString(): string }>(
   props: CardProps<T>
 ) {
   return (
-    <div className="relative flex flex-col w-full gap-24 bg-white border max-w-fit rounded-3xl">
+    <div
+      key={props.id}
+      className="relative flex flex-col w-full gap-24 bg-white border max-w-fit rounded-3xl">
       <span className="absolute z-10 text-xs font-medium top-4 left-6 text-zinc-500">
         {`ID ${props.id}`}
       </span>
@@ -44,7 +46,7 @@ export default function Card<T extends { toString(): string }>(
             const colorInfo = getTypeColor(type.toString());
             return (
               <Tag
-                key={index}
+                key={type.toString()}
                 bg_color={colorInfo.bg_color}
                 txt_color={colorInfo.txt_color}>
                 <span className="text-xs">{type.toString()}</span>
