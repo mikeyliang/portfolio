@@ -17,6 +17,7 @@ async function seed() {
           description: project.description,
           img: project.img,
           projectTime: project.date,
+          inProgress: project.inProgress,
         },
       });
     }

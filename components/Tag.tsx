@@ -10,7 +10,7 @@ type TagType = {
 
 export default function Tag(props: TagType) {
   const cursorStyle = props.href ? "cursor-pointer" : "";
-  const combinedClass = `flex flex-row h-fit ${cursorStyle} justify-center items-center gap-2 font-bold px-2 py-1 rounded-lg w-fit ${props.bg_color} ${props.txt_color} ${props.hover_bg_color}`;
+  const combinedClass = `whitespace-nowrap flex flex-row h-fit ${cursorStyle} justify-center items-center gap-2 font-bold px-2 py-1 rounded-lg w-fit ${props.bg_color} ${props.txt_color} ${props.hover_bg_color}`;
 
   return (
     <a

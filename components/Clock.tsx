@@ -28,5 +28,5 @@ export default function Clock(props: ClockType) {
     };
   }, [props.timeZone]);
 
-  return <div>{time}</div>;
+  return <div className="flex-grow">{time}</div>;
 }

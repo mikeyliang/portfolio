@@ -1,12 +1,23 @@
 [
     {
         "type": [
+            "Mechanical"
+        ],
+        "name": "CUAUV Aurora Downcam",
+        "description": "downward facing camera for CUAUV Aurora",
+        "img": "https://i.imgur.com/67eIhr3.jpg",
+        "date": "10/01/20-5/20/21",
+        "inProgress": false
+    },
+    {
+        "type": [
             "Art"
         ],
         "name": "Dodo Drawing 1",
         "description": "sketch of dodo",
         "img": "https://i.imgur.com/E9f12gz.jpg",
-        "date": "11/13/22"
+        "date": "11/13/22",
+        "inProgress": false
     },
     {
         "type": [
@@ -15,7 +26,8 @@
         "name": "Rabbit Drawing 1",
         "description": "sketch of rabbits",
         "img": "https://i.imgur.com/ZmADncl.jpg",
-        "date": "11/18/22"
+        "date": "11/18/22",
+        "inProgress": false
     },
     {
         "type": [
@@ -24,6 +36,29 @@
         "name": "Cat Drawing 1",
         "description": "sketch of cats",
         "img": "https://i.imgur.com/QYGEDjn.jpg",
-        "date": "11/28/22"
+        "date": "11/28/22",
+        "inProgress": false
+    },
+    {
+        "type": [
+            "Mechanical"
+        ],
+        "name": "CUAUV Polaris Downcam",
+        "description": "downward facing camera for Polaris",
+        "img": "https://i.imgur.com/yO79Tmz.jpg",
+        "date": "10/01/21-5/20/22",
+        "inProgress": false
+    },
+    {
+        "type": [
+            "Electrical",
+            "Mechanical",
+            "Software"
+        ],
+        "name": "custom keyboard",
+        "description": "diy keyboard with custom keycaps",
+        "img": "https://i.imgur.com/JNnouUU.jpg",
+        "date": "12/18/22-TBA",
+        "inProgress": true
     }
 ]

@@ -32,27 +32,30 @@ export default function Home() {
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
 
   function toggleTypeFilter(category: ProjectType) {
-    if (category === "All") {
-      setTypeFilter(
-        typeFilter.length === typeOptions.length ? [] : [...typeOptions]
-      );
-    } else {
-      if (typeFilter.includes(category)) {
-        setTypeFilter(typeFilter.filter((c) => c !== category));
+    setTypeFilter((prevTypeFilter) => {
+      let newTypeFilter: ProjectType[];
+
+      if (category === "All") {
+        newTypeFilter =
+          prevTypeFilter.length === typeOptions.length ? [] : [...typeOptions];
       } else {
-        setTypeFilter([...typeFilter, category]);
+        if (prevTypeFilter.includes(category)) {
+          newTypeFilter = prevTypeFilter.filter((c) => c !== category);
+        } else {
+          newTypeFilter = [...prevTypeFilter, category];
+        }
+
+        const allButAll = typeOptions.filter((c) => c !== "All");
+
+        if (allButAll.every((opt) => newTypeFilter.includes(opt))) {
+          newTypeFilter = [...newTypeFilter, "All"];
+        } else {
+          newTypeFilter = newTypeFilter.filter((c) => c !== "All");
+        }
       }
 
-      if (
-        typeOptions
-          .filter((c) => c !== "All")
-          .every((opt) => typeFilter.includes(opt))
-      ) {
-        setTypeFilter([...typeFilter, "All"]);
-      } else {
-        setTypeFilter(typeFilter.filter((c) => c !== "All"));
-      }
-    }
+      return newTypeFilter;
+    });
   }
 
   useEffect(() => {
@@ -64,7 +67,8 @@ export default function Home() {
         projects?.data.filter(
           (project: Project) =>
             typeFilter.includes("All") ||
-            project.type.every((opt) => typeFilter.includes(opt as ProjectType))
+            // select some not all from project type selection
+            project.type.some((opt) => typeFilter.includes(opt as ProjectType))
         )
       );
     };
@@ -122,10 +126,19 @@ export default function Home() {
                 href={"https://azre.gov/persona/licensees"}>
                 <span className="text-sm">🏠 ADRE Licensed (soon)</span>
               </Tag>
+              <Tag
+                bg_color="bg-red-300"
+                txt_color="text-red-900"
+                hover_bg_color="hover:bg-red-400"
+                href={
+                  "https://gb.abrsm.org/en/our-exams/diplomas/music-performance/arsm-associate-of-the-royal-schools-of-music/"
+                }>
+                <span className="text-sm">🎹 ARSM Merit</span>
+              </Tag>
             </div>
           </div>
-          <div className="flex flex-col justify-between gap-1 text-lg font-semibold sm:gap-3 sm:flex-row text-zinc-700">
-            <span className="flex justify-end font-bold text-zinc-800">
+          <div className="flex flex-row items-center justify-between gap-1 text-lg font-semibold whitespace-nowrap sm:gap-3 lg:flex-col xl:flex-row text-zinc-700">
+            <span className="flex-grow font-bold text-zinc-800">
               🌵 PHX, AZ
             </span>
             <Clock timeZone="America/Phoenix" />
@@ -133,8 +146,9 @@ export default function Home() {
         </div>
         <div className="flex flex-row justify-between w-full">
           <p className="w-full text-xl font-semibold sm:w-3/4 text-zinc-800">
-            This is the process 🎨. Engineering, design, art! Inspiring others
-            drives me, so join my creative and ambitious journey!
+            This is the process 🎨. Engineering, web development, design, art!
+            Inspiring others drives me, so join my creative and ambitious
+            journey!
           </p>
         </div>
         <div className="flex flex-row items-start justify-start gap-2">
@@ -172,7 +186,7 @@ export default function Home() {
                     onClick={() => toggleTypeFilter(category)}>
                     <Tag>
                       <div className="flex flex-row items-center justify-center gap-1">
-                        <IconComponent className="p-0.5 text-zinc-600" />
+                        <IconComponent className="p-0.5 text-zinc-600 hover:text-zinc-500" />
                         <span className="text-sm">{category}</span>
                       </div>
                     </Tag>
@@ -191,6 +205,34 @@ export default function Home() {
               <div key={project.name} className="w-full col-span-1">
                 <style jsx>
                   {`
+                    .vignette_art {
+                      position: relative;
+                      overflow: hidden;
+                      border-radius: 1.5rem;
+                    }
+
+                    .vignette_art::before {
+                      content: "";
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      width: 100%;
+                      height: 100%;
+                      background: radial-gradient(
+                        ellipse at center,
+                        rgba(0, 0, 0, 0) 0%,
+                        rgba(255, 255, 255, 1) 75%
+                      );
+                    }
+
+                    .vignette_art:hover::before {
+                      background: radial-gradient(
+                        ellipse at center,
+                        rgba(0, 0, 0, 0) 0%,
+                        rgba(255, 255, 255, 1) 80%
+                      );
+                    }
+
                     .vignette {
                       position: relative;
                       overflow: hidden;
@@ -207,7 +249,7 @@ export default function Home() {
                       background: radial-gradient(
                         ellipse at center,
                         rgba(0, 0, 0, 0) 0%,
-                        rgba(255, 255, 255, 1) 75%
+                        rgba(255, 255, 255, 0.2) 65%
                       );
                     }
 
@@ -215,7 +257,7 @@ export default function Home() {
                       background: radial-gradient(
                         ellipse at center,
                         rgba(0, 0, 0, 0) 0%,
-                        rgba(255, 255, 255, 1) 80%
+                        rgba(255, 255, 255, 0.2) 80%
                       );
                     }
                   `}
@@ -223,13 +265,19 @@ export default function Home() {
                 <Card
                   types={project.type as ProjectType[]}
                   id={project.id}
+                  inProgress={project.inProgress}
                   date={project.projectTime}>
-                  <div className="cursor-pointer vignette">
+                  <div
+                    className={`cursor-pointer ${
+                      project.type.some((type) => type == "Art")
+                        ? "vignette_art"
+                        : "vignette"
+                    }`}>
                     {project.img && (
                       <Image
                         className="rounded-4xl"
-                        width={500}
-                        height={500}
+                        width={1000}
+                        height={1000}
                         src={project.img}
                         alt={project.name}
                       />

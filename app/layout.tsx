@@ -21,8 +21,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.variable}>
-        <main className="h-auto px-4 py-24 sm:px-16 lg:p-52 lg:px-52 bg-zinc-100 dark:bg-zinc-700">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body
+        className={`${inter.variable} h-auto max-h-full px-4 py-24 sm:px-16 lg:p-52  lg:px-52 bg-zinc-100 dark:bg-zinc-700`}>
+        <main>
           <Nav />
           {children}
         </main>

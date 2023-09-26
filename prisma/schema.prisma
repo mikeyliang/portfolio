@@ -14,6 +14,7 @@ model Project {
   description String?
   img         String?
   projectTime String?
+  inProgress  Boolean  @default(true)
   createdAt   DateTime @default(now())
   modifiedAt  DateTime @updatedAt
   id          Int      @id @default(autoincrement())
