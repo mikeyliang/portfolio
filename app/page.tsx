@@ -81,7 +81,7 @@ export default function Home() {
       <div className="flex flex-col w-full gap-12 p-8 bg-white border lg:gap-24 sm:p-16 rounded-3xl">
         <div className="flex flex-col-reverse items-start justify-between gap-4 lg:flex-row lg:gap-0">
           <div className="flex flex-col gap-8 bg-white rounded-2xl">
-            <div className="flex flex-row flex-wrap items-center gap-1 text-2xl font-bold text-zinc-500">
+            <div className="flex flex-row flex-wrap items-center gap-1 text-xl font-bold sm:text-2xl text-zinc-500">
               <a
                 href="https://linkedin.com"
                 className="flex flex-row items-center gap-1 hover:underline hover:text-blue-500 underline-offset-8">
@@ -109,7 +109,7 @@ export default function Home() {
                 👋🏻 hi there! it&apos;s michael ✌🏻
               </p>
             </div>
-            <div className="flex flex-row gap-3">
+            <div className="flex flex-row flex-wrap gap-3">
               <Tag
                 bg_color="bg-blue-200"
                 txt_color="text-blue-900"

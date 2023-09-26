@@ -10,7 +10,7 @@ export default function Nav() {
         miko
       </a>
 
-      <div className="flex flex-row items-center justify-center gap-2 px-2 py-3 font-bold bg-white border shadow-md text-zinc-800 border-zinc-200 rounded-xl whitespace-nowrap">
+      <div className="flex-row items-center justify-center hidden gap-2 px-2 py-3 font-bold bg-white border shadow-md md:flex text-zinc-800 border-zinc-200 rounded-xl whitespace-nowrap">
         <IconClipboardText className="text-blue-400" />
         <span> Project Pages &</span>
         <IconFileTypePdf className="text-red-400" />
