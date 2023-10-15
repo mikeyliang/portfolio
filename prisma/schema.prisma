@@ -3,9 +3,10 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_PRISMA_URL")
-  directUrl = env("DATABASE_URL_NON_POOLING")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Project {
@@ -18,4 +19,60 @@ model Project {
   createdAt   DateTime @default(now())
   modifiedAt  DateTime @updatedAt
   id          Int      @id @default(autoincrement())
+  projectLink String?
+}
+
+model TubeLevel {
+  level      Int         @id @unique
+  type       LevelType   @default(REGULAR)
+  createdAt  DateTime    @default(now())
+  modifiedAt DateTime    @updatedAt
+  tubes      Tube[]
+  tubeColors TubeColor[]
+  tubeMoves  TubeMoves[]
+}
+
+model TubeMoves {
+  id        Int       @id @default(autoincrement())
+  step      Int
+  from      Int
+  fromTube  Tube      @relation(name: "from", fields: [from], references: [id])
+  to        Int
+  toTube    Tube      @relation(name: "to", fields: [to], references: [id])
+  level     Int
+  tubeLevel TubeLevel @relation(fields: [level], references: [level], onDelete: Cascade)
+}
+
+model Tube {
+  id                Int                 @id @default(autoincrement())
+  tubeIndex         Int
+  tubeMovesFrom     TubeMoves[]         @relation("from")
+  tubeMovesTo       TubeMoves[]         @relation("to")
+  tubeLevel         TubeLevel           @relation(fields: [level], references: [level], onDelete: Cascade)
+  level             Int
+  TubeColorRelation TubeColorRelation[]
+}
+
+model TubeColorRelation {
+  id          Int       @id @unique @default(autoincrement())
+  tubeId      Int
+  tube        Tube      @relation(fields: [tubeId], references: [id], onDelete: Cascade)
+  tubeColorId Int
+  tubeColor   TubeColor @relation(fields: [tubeColorId], references: [id], onDelete: Cascade)
+}
+
+model TubeColor {
+  id                Int                 @id @unique @default(autoincrement())
+  colorIndex        Int
+  red               Int
+  green             Int
+  blue              Int
+  tubeColorRelation TubeColorRelation[]
+  tubeLevel         TubeLevel           @relation(fields: [level], references: [level], onDelete: Cascade)
+  level             Int
+}
+
+enum LevelType {
+  REGULAR
+  UNKNOWN
 }
