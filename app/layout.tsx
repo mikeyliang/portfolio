@@ -30,7 +30,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} h-auto max-h-full px-4 py-24 sm:px-16 lg:p-52  lg:px-52 bg-zinc-100`}>
+        className={`${inter.variable} h-auto max-h-full px-8 lg:py-24 sm:px-16 lg:p-52  lg:px-52 bg-zinc-100`}>
         <main>
           <Nav />
           {children}

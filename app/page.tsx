@@ -193,7 +193,7 @@ export default function Home() {
                   </button>
                 );
               }
-              return null; // This line is necessary to satisfy React's requirement for a return value
+              return null;
             })}
           </div>
         </div>

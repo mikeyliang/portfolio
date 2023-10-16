@@ -23,24 +23,27 @@ model Project {
 }
 
 model TubeLevel {
-  level      Int         @id @unique
-  type       LevelType   @default(REGULAR)
-  createdAt  DateTime    @default(now())
-  modifiedAt DateTime    @updatedAt
-  tubes      Tube[]
-  tubeColors TubeColor[]
-  tubeMoves  TubeMoves[]
+  level             Int                 @id @unique
+  type              LevelType           @default(REGULAR)
+  createdAt         DateTime            @default(now())
+  modifiedAt        DateTime            @updatedAt
+  tubes             Tube[]
+  tubeColors        TubeColor[]
+  tubeMoves         TubeMoves[]
+  tubeColorRelation TubeColorRelation[]
 }
 
 model TubeMoves {
   id        Int       @id @default(autoincrement())
   step      Int
   from      Int
-  fromTube  Tube      @relation(name: "from", fields: [from], references: [id])
+  fromTube  Tube      @relation(name: "from", fields: [from], references: [id], onDelete: Cascade)
   to        Int
-  toTube    Tube      @relation(name: "to", fields: [to], references: [id])
+  toTube    Tube      @relation(name: "to", fields: [to], references: [id], onDelete: Cascade)
   level     Int
   tubeLevel TubeLevel @relation(fields: [level], references: [level], onDelete: Cascade)
+
+  @@unique([level, step])
 }
 
 model Tube {
@@ -51,14 +54,21 @@ model Tube {
   tubeLevel         TubeLevel           @relation(fields: [level], references: [level], onDelete: Cascade)
   level             Int
   TubeColorRelation TubeColorRelation[]
+
+  @@unique([level, tubeIndex])
 }
 
 model TubeColorRelation {
   id          Int       @id @unique @default(autoincrement())
+  position    Int
   tubeId      Int
   tube        Tube      @relation(fields: [tubeId], references: [id], onDelete: Cascade)
   tubeColorId Int
   tubeColor   TubeColor @relation(fields: [tubeColorId], references: [id], onDelete: Cascade)
+  level       Int
+  tubeLevel   TubeLevel @relation(fields: [level], references: [level], onDelete: Cascade)
+
+  @@unique([tubeId, tubeColorId, level, position])
 }
 
 model TubeColor {
@@ -70,6 +80,8 @@ model TubeColor {
   tubeColorRelation TubeColorRelation[]
   tubeLevel         TubeLevel           @relation(fields: [level], references: [level], onDelete: Cascade)
   level             Int
+
+  @@unique([level, colorIndex])
 }
 
 enum LevelType {

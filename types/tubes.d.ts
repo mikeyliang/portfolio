@@ -7,17 +7,18 @@ import {
 // Define a type for Club with its relations
 const tubeLevelWithRelations = Prisma.validator<Prisma.TubeLevelArgs>()({
   include: {
-    tube: {
-      include: {
-        tubeColors: true,
-        tubes: true,
-        tubeMoves: true,
-      },
-    },
+    tubeColors: true,
+    tubes: true,
   },
 });
 
-export type TubeLevel = Prisma.ClubGetPayload<typeof tubeLevelWithRelations>;
+export type TubeLevel = Prisma.TubeLevelGetPayload<
+  typeof tubeLevelWithRelations
+> & {
+  _count: {
+    tubeMoves: number;
+  };
+};
 
 const tubeRelations = Prisma.validator<Prisma.TubeArgs>()({
   include: {
@@ -25,7 +26,7 @@ const tubeRelations = Prisma.validator<Prisma.TubeArgs>()({
   },
 });
 
-export type Tube = Prisma.ClubGetPayload<typeof tubeRelations>;
+export type Tube = Prisma.TubeGetPayload<typeof tubeRelations>;
 
 export type TubeColor = TubeColorType;
 
