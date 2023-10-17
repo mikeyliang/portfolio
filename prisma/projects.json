@@ -60,5 +60,18 @@
         "img": "https://i.imgur.com/JNnouUU.jpg",
         "date": "12/18/22-TBA",
         "inProgress": true
+    },
+    {
+        "type": [
+            "Electrical",
+            "Mechanical",
+            "Software"
+        ],
+        "name": "tube sorting",
+        "description": "machine to automatically play tube sort",
+        "img": "https://i.imgur.com/cHu4MyB.jpg",
+        "date": "4/01/23-TBA",
+        "inProgress": true,
+        "projectLink": "tubesort"
     }
 ]
