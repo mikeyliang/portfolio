@@ -108,7 +108,7 @@ export default async function Page({
             {tubeLevel?.tubeColors.map((tubeColor) => (
               <div
                 className="w-4 h-4 rounded-lg"
-                key={`${tubeColor.colorIndex}`}
+                key={`color-${tubeColor.colorIndex}`}
                 style={{
                   backgroundColor: `rgb(${tubeColor.red}, ${tubeColor.green}, ${tubeColor.blue})`,
                 }}></div>

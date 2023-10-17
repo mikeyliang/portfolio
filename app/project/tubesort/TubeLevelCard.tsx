@@ -24,7 +24,7 @@ export default function TubeLevelCard(props: TubeLevelCardProps) {
             {props.tubeLevel.tubeColors.map((tubeColor) => (
               <div
                 className="w-4 h-4 rounded-lg"
-                key={`${tubeColor.colorIndex}`}
+                key={`levelcolor-${tubeColor.colorIndex}`}
                 style={{
                   backgroundColor: `rgb(${tubeColor.red}, ${tubeColor.green}, ${tubeColor.blue})`,
                 }}></div>

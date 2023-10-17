@@ -24,7 +24,7 @@ export function getTypeColor(tag: string) {
 type CardProps<T extends { toString(): string }> = {
   id: number;
   date: string | null;
-  link?: string
+  link: string | null;
   inProgress?: boolean;
   types: T[];
   children: React.ReactNode;

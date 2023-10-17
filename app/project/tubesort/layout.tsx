@@ -85,10 +85,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 }>
                 {(response: { data: TubeLevel[] }) => (
                   <div
+                    key="infinite_scroll"
                     className={`flex flex-col items-stretch justify-center w-full px-2`}>
                     {response.data &&
                       response.data.map((tubeLevel) => (
-                        <div key={tubeLevel.level} className="mb-4">
+                        <div key={`level-${tubeLevel.level}`} className="mb-4">
                           <TubeLevelCard tubeLevel={tubeLevel} />
                         </div>
                       ))}

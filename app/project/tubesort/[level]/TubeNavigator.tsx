@@ -33,23 +33,25 @@ type TubeProps = {
   colorIndex?: number;
   colors: number[];
   allColors: ColorProps[];
+  step: number;
 };
 
-function Tubes({ tubeIndex, colors, allColors }: TubeProps) {
+function Tubes({ step, tubeIndex, colors, allColors }: TubeProps) {
   return (
-    <div className="flex flex-col items-center gap-[2px] px-1 py-1.5 rounded-t-lg rounded-b-2xl bg-zinc-200 hover:bg-zinc-300 border-zinc-300 border-2">
+    <div
+      className="flex flex-col items-center gap-[2px] px-1 py-1.5 rounded-t-lg rounded-b-2xl bg-zinc-200 hover:bg-zinc-300 border-zinc-300 border-2">
       {Array.from({ length: 4 - colors.length }).map((_, index) => (
         <div
-          key={`${tubeIndex}-empty-${index}`} // unique and stable key
+          key={`layout-${step}_${tubeIndex}-empty-${index}`} // unique and stable key
           className="w-8 h-8 border border-gray-200 rounded-full"></div>
       ))}
-      {[...colors].reverse().map((colorIndex) => {
+      {[...colors].reverse().map((colorIndex, index) => {
         // <-- Reverse the colors for rendering
         const color = allColors.find((c) => c.colorIndex === colorIndex);
         if (color)
           return (
             <Color
-              key={color.colorIndex}
+              key={`layout-${step}_tube-${tubeIndex}_color-${color.colorIndex}_idx-${index}`}
               red={color.red}
               green={color.green}
               blue={color.blue}
@@ -70,10 +72,16 @@ type TubeLayoutProps = {
 function TubeLayout({ step, layout, allColors }: TubeLayoutProps) {
   return (
     <div
-      key={step}
+      key={`layout-${step}`}
       className="flex flex-wrap items-center justify-center w-2/3 space-x-4 gap-y-4">
       {layout.map((tubeColors, index) => (
-        <Tubes colors={tubeColors} allColors={allColors} tubeIndex={index} />
+        <Tubes
+            key={`layout-${step}_tube-${index}`}
+          colors={tubeColors}
+          allColors={allColors}
+          tubeIndex={index}
+          step={step}
+        />
       ))}
     </div>
   );
@@ -137,7 +145,6 @@ export default function TubeNavigator({
 
   useEffect(() => {
     const newHistory = calculateMoves(tubeMoves, layout);
-    console.log(newHistory);
     setHistory(newHistory);
   }, [tubeMoves, layout]); // added dependencies
 
