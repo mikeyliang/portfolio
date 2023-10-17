@@ -26,7 +26,7 @@ export default function Clock(props: ClockType) {
     return () => {
       clearInterval(interval);
     };
-  }, [props.timeZone]);
+  }, [props.timeZone, updateClock]);
 
   return <div className="flex-grow">{time}</div>;
 }
