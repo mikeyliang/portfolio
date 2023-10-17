@@ -28,6 +28,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
           rel="stylesheet"
         />
+        <link rel="icon" href="/favicon.png" sizes="any" />
       </head>
       <body
         className={`${inter.variable} h-auto max-h-full px-8 lg:py-24 sm:px-16 lg:p-52  lg:px-52 bg-zinc-100`}>

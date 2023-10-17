@@ -202,7 +202,14 @@ export default function Home() {
         {filteredProjects &&
           filteredProjects.map((project) => {
             return (
-              <div key={project.name} className="w-full col-span-1">
+              <a
+                key={project.name}
+                className={`w-full col-span-1 ${
+                  project.projectLink ? "cursor-pointer" : "cursor-default"
+                }`}
+                href={
+                  project.projectLink ? `/project/${project.projectLink}` : ""
+                }>
                 <style jsx>
                   {`
                     .vignette_art {
@@ -266,9 +273,10 @@ export default function Home() {
                   types={project.type as ProjectType[]}
                   id={project.id}
                   inProgress={project.inProgress}
-                  date={project.projectTime}>
+                  date={project.projectTime}
+                  link={project.projectLink}>
                   <div
-                    className={`cursor-pointer ${
+                    className={` ${
                       project.type.some((type) => type == "Art")
                         ? "vignette_art"
                         : "vignette"
@@ -284,7 +292,7 @@ export default function Home() {
                     )}
                   </div>
                 </Card>
-              </div>
+              </a>
             );
           })}
       </div>

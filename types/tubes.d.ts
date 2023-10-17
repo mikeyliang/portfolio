@@ -9,6 +9,12 @@ const tubeLevelWithRelations = Prisma.validator<Prisma.TubeLevelArgs>()({
   include: {
     tubeColors: true,
     tubes: true,
+    tubeColorRelation: {
+      include: {
+        tube: true,
+        tubeColor: true,
+      },
+    },
   },
 });
 
@@ -20,11 +26,16 @@ export type TubeLevel = Prisma.TubeLevelGetPayload<
   };
 };
 
-const tubeRelations = Prisma.validator<Prisma.TubeArgs>()({
+const tubeColorRelations = Prisma.validator<Prisma.TubeLevelArgs>()({
   include: {
-    tubeColorRelation: true,
+    tube: true,
+    tubeColor: true,
   },
 });
+
+export type TubeColorRelation = Prisma.TubeColorRelationGetPayload<
+  typeof tubeColorRelations
+>;
 
 export type Tube = Prisma.TubeGetPayload<typeof tubeRelations>;
 
@@ -32,9 +43,9 @@ export type TubeColor = TubeColorType;
 
 const tubeMovesRelations = Prisma.validator<Prisma.TubeMovesArgs>()({
   include: {
-    tubeFrom: true,
-    tubeTo: true,
+    fromTube: true,
+    toTube: true,
   },
 });
 
-export type TubeMove = Prisma.ClubGetPayload<typeof tubeMovesRelations>;
+export type TubeMove = Prisma.TubeMoveGetPayload<typeof tubeMovesRelations>;

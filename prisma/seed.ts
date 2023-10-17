@@ -18,6 +18,7 @@ async function seed() {
           img: project.img,
           projectTime: project.date,
           inProgress: project.inProgress,
+          projectLink: project.projectLink || undefined,
         },
       });
     }

@@ -27,8 +27,7 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const data = await req.json();
-
-  await prisma.tubeLevel.deleteMany();
+  
 
   try {
     //creating tube level
@@ -69,7 +68,11 @@ export async function POST(req: Request) {
               where: { tubeIndex: tubeIdx, level: tubeLevel.level },
             });
             const c = await prisma.tubeColor.findFirst({
-              where: { colorIndex: parseInt(color), level: tubeLevel.level },
+              where: {
+                // input tubes have colors start at 1
+                colorIndex: parseInt(color) - 1,
+                level: tubeLevel.level,
+              },
             });
             if (c && t) {
               return prisma.tubeColorRelation.create({
@@ -121,7 +124,6 @@ export async function POST(req: Request) {
       data: { tubeLevel, tubeColors, tubes },
     });
   } catch (error) {
-    console.log(error);
     await prisma.tubeLevel.delete({ where: { level: data.level } });
 
     return NextResponse.json({

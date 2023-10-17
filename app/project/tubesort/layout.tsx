@@ -32,7 +32,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const fetcher = async (url: string) => {
     try {
       const res = await fetch(url);
-      console.log(res);
       if (!res.ok) throw new Error("An error occurred while fetching data.");
       return await res.json();
     } catch (err) {
@@ -75,7 +74,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <InfiniteScroll
                 swr={swr}
                 isReachingEnd={(swr) => {
-                  console.log(swr.data);
                   return (
                     swr.data?.[0]?.length === 0 || swr.data?.length < PAGE_SIZE
                   );
@@ -91,9 +89,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     {response.data &&
                       response.data.map((tubeLevel) => (
                         <div key={tubeLevel.level} className="mb-4">
-                          <TubeLevelCard
-                            tubeLevel={tubeLevel}
-                          />
+                          <TubeLevelCard tubeLevel={tubeLevel} />
                         </div>
                       ))}
                     {response.data &&
