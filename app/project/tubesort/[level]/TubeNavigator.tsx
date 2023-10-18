@@ -38,8 +38,7 @@ type TubeProps = {
 
 function Tubes({ step, tubeIndex, colors, allColors }: TubeProps) {
   return (
-    <div
-      className="flex flex-col items-center gap-[2px] px-1 py-1.5 rounded-t-lg rounded-b-2xl bg-zinc-200 hover:bg-zinc-300 border-zinc-300 border-2">
+    <div className="flex flex-col items-center gap-[2px] px-1 py-1.5 rounded-t-lg rounded-b-2xl bg-zinc-200 hover:bg-zinc-300 border-zinc-300 border-2">
       {Array.from({ length: 4 - colors.length }).map((_, index) => (
         <div
           key={`layout-${step}_${tubeIndex}-empty-${index}`} // unique and stable key
@@ -73,10 +72,10 @@ function TubeLayout({ step, layout, allColors }: TubeLayoutProps) {
   return (
     <div
       key={`layout-${step}`}
-      className="flex flex-wrap items-center justify-center w-2/3 space-x-4 gap-y-4">
+      className="flex flex-wrap items-center justify-center space-x-4 w-7/8 gap-y-4">
       {layout.map((tubeColors, index) => (
         <Tubes
-            key={`layout-${step}_tube-${index}`}
+          key={`layout-${step}_tube-${index}`}
           colors={tubeColors}
           allColors={allColors}
           tubeIndex={index}

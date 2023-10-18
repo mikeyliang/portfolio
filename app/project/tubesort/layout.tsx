@@ -12,6 +12,9 @@ import useSWRInfinite from "swr/infinite";
 
 import { Tube, TubeLevel, TubeColor, TubeMove } from "../../../types/tubes";
 import TubeLevelCard from "./TubeLevelCard";
+import Search from "@/components/Search";
+
+import Loading from "./levelLoading";
 
 const PAGE_SIZE = 50;
 
@@ -19,6 +22,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   //hooks
   const searchParams = useSearchParams();
   const params = useParams();
+  const pathname = usePathname();
 
   //states
   const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -31,7 +35,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   // data fetching
   const fetcher = async (url: string) => {
     try {
+      setIsLoading(true);
       const res = await fetch(url);
+      setIsLoading(false);
       if (!res.ok) throw new Error("An error occurred while fetching data.");
       return await res.json();
     } catch (err) {
@@ -44,13 +50,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       if (previousPageData && !previousPageData.data.length) return null;
 
       if (pageIndex === 0 && !previousPageData) {
-        return `/api/project/tubes?take=${PAGE_SIZE}`;
+        return `/api/project/tubes?take=${PAGE_SIZE}${
+          searchInput ? `&search=${searchInput}` : ""
+        }`;
       } else {
         const cursor = previousPageData?.data[previousPageData.data.length - 1]
           .level as number;
         return `/api/project/tubes?take=${PAGE_SIZE}${
           cursor ? `&skip=1&cursor=${cursor}` : ""
-        }`;
+        }${searchInput ? `&search=${searchInput}` : ""}`;
       }
     },
     fetcher,
@@ -60,17 +68,28 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div
-        className={`flex flex-row items-start justify-center w-auto h-full gap-4 px-2 sm:px-4 ${
+        className={`flex flex-row items-start justify-center w-auto h-full gap-6  sm:px-4 ${
           params.id ? "bg-white md:bg-zinc-100" : "bg-zinc-100"
         }`}>
         <div
-          className={`relative gap-6 xl:flex-row xl:items-start w-full md:w-auto h-full ${
+          className={`relative gap-6  xl:items-start w-full md:w-auto h-full max-w-[290px] sm:max-w-[320px] md:max-w-[360px] md:min-w-[360px] lg:max-w-[390px] lg:min-w-[390px] xl:max-w-[420px] xl:min-w-[420px] 2xl:max-w-[460px] 2xl:min-w-[460px] min-w-[290px] sm:min-w-[320px] ${
             params.id
               ? "md:flex md:flex-col hidden"
               : "flex flex-col justify-start items-center"
           }`}>
-          <div className="flex flex-col items-center justify-start w-full gap-6 md:w-auto">
-            <div className="relative top-0 left-0 right-0 bottom-0 flex flex-col items-center md:w-auto justify-start h-full w-full min-h-[600px] max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-132px)] pb-6 overflow-y-auto overflow-x-hidden scrollBackgroundTransparent">
+          <Search
+            initialSearch={searchInput}
+            setSearchInput={setSearchInput}
+            searching={isLoading}
+            searchParams={searchParams}
+            pathname={pathname}
+            placeholder={"Search for a level"}
+          />
+
+          {isLoading && <Loading />}
+
+          <div className="flex flex-col items-center justify-start w-full gap-6 ">
+            <div className="relative top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-start h-full w-full min-h-[600px] max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-132px)] pb-6 overflow-y-auto overflow-x-hidden scrollBackgroundTransparent">
               <InfiniteScroll
                 swr={swr}
                 isReachingEnd={(swr) => {
@@ -86,7 +105,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 {(response: { data: TubeLevel[] }) => (
                   <div
                     key="infinite_scroll"
-                    className={`flex flex-col items-stretch justify-center w-full px-2`}>
+                    className={`flex flex-col items-stretch justify-center w-full`}>
                     {response.data &&
                       response.data.map((tubeLevel) => (
                         <div key={`level-${tubeLevel.level}`} className="mb-4">

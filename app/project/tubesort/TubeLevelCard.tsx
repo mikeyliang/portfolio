@@ -14,7 +14,7 @@ export default function TubeLevelCard(props: TubeLevelCardProps) {
       onClick={() => {
         router.push(`/project/tubesort/${props.tubeLevel.level}`);
       }}
-      className="flex flex-col items-center justify-center gap-4 p-6 max-w-[400px] min-w-[360px] 2xs:min-w-[360px] sm:min-w-[360px] border border-zinc-200  bg-white cursor-pointer md:hover:shadow-md rounded-2xl">
+      className="flex flex-col items-center justify-center w-auto gap-4 p-6 bg-white border cursor-pointer border-zinc-200 md:hover:shadow-md rounded-2xl">
       <div className="flex flex-row items-start justify-between w-full gap-4 px-2">
         <span className="h-full p-2 text-2xl font-extrabold rounded-xl bg-zinc-200">
           {`${props.tubeLevel.level}`}

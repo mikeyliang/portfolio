@@ -10,7 +10,9 @@ export async function GET(req: Request) {
   const cursorString = searchParams.get("cursor");
   const cursor = cursorString ? parseInt(cursorString) : undefined;
 
-  const data = await prisma.tubeLevel.findMany({
+  const search = searchParams.get("search") || undefined;
+
+  let data = await prisma.tubeLevel.findMany({
     include: {
       tubes: true,
       tubeColors: true,
@@ -22,12 +24,15 @@ export async function GET(req: Request) {
     skip: skip,
     cursor: cursor ? { level: cursor } : undefined,
   });
+  if (search) {
+    data = data.filter((item) => item.level.toString().includes(search));
+  }
+
   return NextResponse.json({ data });
 }
 
 export async function POST(req: Request) {
   const data = await req.json();
-  
 
   try {
     //creating tube level
