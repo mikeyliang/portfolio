@@ -88,8 +88,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           {isLoading && <Loading />}
 
-          <div className="flex flex-col items-center justify-start w-full gap-6 ">
-            <div className="relative top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-start h-full w-full min-h-[600px] max-h-[calc(100vh-210px)] xl:max-h-[calc(100vh-132px)] pb-6 overflow-y-auto overflow-x-hidden scrollBackgroundTransparent">
+          <div className="flex flex-col items-center justify-start w-full gap-6">
+            <div className="relative top-0 left-0 right-0 pr-4 bottom-0 flex flex-col items-center justify-start h-full w-full min-h-[500px] max-h-[calc(85vh-210px)] xl:max-h-[calc(85vh-132px)] pb-6 overflow-y-auto overflow-x-hidden scrollBackgroundTransparent">
               <InfiniteScroll
                 swr={swr}
                 isReachingEnd={(swr) => {
