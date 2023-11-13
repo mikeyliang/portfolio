@@ -28,6 +28,8 @@ module.exports = {
 
     "2xl": "2048px",
     // => @media (min-width: 1536px) { ... }
+
+    "3xl": "2560px",
   },
   plugins: [],
 };

@@ -68,12 +68,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div
-        className={`flex flex-row items-start justify-center w-auto h-full gap-6  sm:px-4 ${
-          params.id ? "bg-white md:bg-zinc-100" : "bg-zinc-100"
+        className={`flex flex-row items-start justify-center w-full md:w-auto h-full gap-6  sm:px-4 ${
+          params.level ? "" : "bg-zinc-100"
         }`}>
         <div
-          className={`relative gap-6  xl:items-start w-full md:w-auto h-full max-w-[290px] sm:max-w-[320px] md:max-w-[360px] md:min-w-[360px] lg:max-w-[390px] lg:min-w-[390px] xl:max-w-[420px] xl:min-w-[420px] 2xl:max-w-[460px] 2xl:min-w-[460px] min-w-[290px] sm:min-w-[320px] ${
-            params.id
+          className={`relative gap-6  xl:items-start w-full md:w-auto h-full max-w-[350px] sm:max-w-[390px] md:max-w-[360px] md:min-w-[360px] lg:max-w-[390px] lg:min-w-[390px] xl:max-w-[420px] xl:min-w-[420px] 2xl:max-w-[460px] 2xl:min-w-[460px] min-w-[385px] sm:min-w-[320px] ${
+            params.level
               ? "md:flex md:flex-col hidden"
               : "flex flex-col justify-start items-center"
           }`}>
@@ -115,7 +115,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     {response.data &&
                       response.data.length === 0 &&
                       !isLoading && (
-                        <div className="flex flex-col items-center justify-center gap-2 p-3 md:max-w-[385px] lg:max-w-[400px] min-w-[280px] 2xs:min-w-[290px] sm:min-w-[385px]">
+                        <div className="flex flex-col items-center justify-center gap-2 p-3 max-w-[350px] sm:max-w-[390px] md:max-w-[385px] lg:max-w-[400px] 2xs:min-w-[290px] sm:min-w-[385px] min-w-[320px]">
                           <span className="font-semibold text-zinc-600">
                             No Results
                           </span>
@@ -129,8 +129,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
 
         <div
-          className={`h-full min-x-[320px] w-full sm:items-stretch ${
-            params.id ? "md:block" : "hidden md:block"
+          className={`h-full  w-full sm:items-stretch ${
+            params.level ? "md:block" : "hidden md:block"
           }`}>
           {children}
         </div>

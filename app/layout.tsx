@@ -1,12 +1,12 @@
+"use client";
+
 import "./globals.css";
 import { Inter } from "next/font/google";
 
 import Nav from "../components/Nav";
-
-export const metadata = {
-  title: "miko's portfolio",
-  description: "miko's portfolio, a place to showcase my projects and skills.",
-};
+import LoadingAnimation from "../components/LoadingAnimation";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -19,6 +19,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [isLoading, setLoading] = useState(true);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000); // 2000 milliseconds = 2 seconds
+
+    return () => clearTimeout(timer); // Clear the timer if the component unmounts
+  }, []);
   return (
     <html lang="en">
       <head>
@@ -30,11 +40,19 @@ export default function RootLayout({
         />
         <link rel="icon" href="/favicon.png" type="image/png" />
       </head>
-      <body
-        className={`${inter.variable} h-auto max-h-full px-8 lg:py-24 sm:px-16 lg:p-52  lg:px-52 bg-zinc-100`}>
+      <body className={`${inter.variable}  bg-zinc-100`}>
         <main>
-          <Nav />
-          {children}
+          {pathname === "/" && isLoading ? (
+            <>
+              <LoadingAnimation></LoadingAnimation>
+            </>
+          ) : (
+            <div className="h-auto max-h-full px-8 lg:py-24 sm:px-16 lg:p-52 lg:px-52 ">
+              <Nav />
+
+              {children}
+            </div>
+          )}
         </main>
       </body>
     </html>
