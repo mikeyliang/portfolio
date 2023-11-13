@@ -38,7 +38,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="icon" href="/icon.png" type="image/png" />
       </head>
       <body className={`${inter.variable}  bg-zinc-100`}>
         <main>
