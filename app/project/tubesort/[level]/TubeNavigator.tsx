@@ -9,7 +9,13 @@ import {
   TubeMove,
 } from "../../../../types/tubes";
 
-import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
+import {
+  IconArrowNarrowLeft,
+  IconArrowNarrowRight,
+  IconPlayerPlayFilled,
+  IconPlayerStopFilled,
+} from "@tabler/icons-react";
+import Tag from "@/components/Tag";
 
 type ColorProps = {
   red: number;
@@ -45,7 +51,6 @@ function Tubes({ step, tubeIndex, colors, allColors }: TubeProps) {
           className="w-8 h-8 border border-gray-200 rounded-full"></div>
       ))}
       {[...colors].reverse().map((colorIndex, index) => {
-        // <-- Reverse the colors for rendering
         const color = allColors.find((c) => c.colorIndex === colorIndex);
         if (color)
           return (
@@ -141,11 +146,34 @@ export default function TubeNavigator({
 }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [history, setHistory] = useState<number[][][]>([layout || []]);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const newHistory = calculateMoves(tubeMoves, layout);
     setHistory(newHistory);
-  }, [tubeMoves, layout]); // added dependencies
+  }, [tubeMoves, layout]);
+
+  const play = () => {
+    stop();
+    const id = setInterval(() => {
+      setCurrentStep((prev) => {
+        if (prev < tubeMoves.length) {
+          return prev + 1;
+        } else {
+          stop();
+          return prev;
+        }
+      });
+    }, 500);
+    setIntervalId(id);
+  };
+
+  const stop = () => {
+    if (intervalId) {
+      clearInterval(intervalId);
+      setIntervalId(null);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center w-full gap-12 ">
@@ -175,6 +203,29 @@ export default function TubeNavigator({
           }>
           <span>Next</span>
           <IconArrowNarrowRight />
+        </button>
+
+        <button onClick={play}>
+          <Tag
+            hover_bg_color="hover:bg-green-300"
+            bg_color="bg-green-100"
+            txt_color="text-color-600">
+            <div className="flex flex-row items-center justify-center gap-1">
+              <IconPlayerPlayFilled className="p-1" />
+              <span>Play</span>
+            </div>
+          </Tag>
+        </button>
+        <button onClick={stop}>
+          <Tag
+            hover_bg_color="hover:bg-red-300"
+            bg_color="bg-red-100"
+            txt_color="text-red-600">
+            <div className="flex flex-row items-center justify-center gap-1">
+              <IconPlayerStopFilled className="p-1" />
+              <span>Stop</span>
+            </div>
+          </Tag>
         </button>
       </div>
     </div>

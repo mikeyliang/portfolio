@@ -4,9 +4,11 @@ import fs from "fs";
 
 async function seed() {
   try {
-    await prisma.project.deleteMany();
+    // await prisma.projectContent.deleteMany({});
+    // await prisma.project.deleteMany({});
     // Read the contents of projects.json
     const projects = require("./projects.json");
+    const projectContents = require("./projectContents.json");
 
     for (const project of projects) {
       // Create the project using the Prisma Client
@@ -18,9 +20,24 @@ async function seed() {
           img: project.img,
           projectTime: project.date,
           inProgress: project.inProgress,
-          projectLink: project.projectLink || undefined,
         },
       });
+    }
+
+    for (const projectContent of projectContents) {
+      const project = await prisma.project.findFirst({
+        where: { name: projectContent.projectName },
+      });
+      if (project && project.id) {
+        await prisma.projectContent.create({
+          data: {
+            content: projectContent.content,
+            order: projectContent.order,
+            contentType: projectContent.contentType,
+            projectId: project?.id,
+          },
+        });
+      }
     }
 
     console.log("Seeding completed successfully!");

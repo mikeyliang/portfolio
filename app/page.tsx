@@ -155,7 +155,7 @@ export default function Home() {
           <span className="text-lg font-bold text-zinc-700 whitespace-nowrap">
             My works:
           </span>
-          <div className="flex flex-row flex-wrap items-center justify-start gap-2">
+          <div className="flex flex-row flex-wrap items-center justify-start gap-1 sm:gap-2">
             <button onClick={() => toggleTypeFilter("All")}>
               {typeFilter.length === typeOptions.length ? (
                 <Tag>
@@ -204,12 +204,8 @@ export default function Home() {
             return (
               <a
                 key={project.name}
-                className={`w-full col-span-1 ${
-                  project.projectLink ? "cursor-pointer" : "cursor-default"
-                }`}
-                href={
-                  project.projectLink ? `/project/${project.projectLink}` : ""
-                }>
+                className={`w-full col-span-1 cursor-pointer`}
+                href={`/project/${project.id}`}>
                 <style jsx>
                   {`
                     .vignette_art {
@@ -273,8 +269,7 @@ export default function Home() {
                   types={project.type as ProjectType[]}
                   id={project.id}
                   inProgress={project.inProgress}
-                  date={project.projectTime}
-                  link={project.projectLink}>
+                  date={project.projectTime}>
                   <div
                     className={` ${
                       project.type.some((type) => type == "Art")

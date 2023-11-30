@@ -8,6 +8,8 @@ import LoadingAnimation from "../components/LoadingAnimation";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { Worker } from "@react-pdf-viewer/core";
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -50,7 +52,9 @@ export default function RootLayout({
             <div className="h-auto max-h-full px-8 lg:py-24 sm:px-16 lg:p-52 lg:px-52 ">
               <Nav />
 
-              {children}
+              <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+                {children}
+              </Worker>
             </div>
           )}
         </main>

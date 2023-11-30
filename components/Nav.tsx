@@ -2,7 +2,7 @@ import { IconFileTypePdf, IconClipboardText } from "@tabler/icons-react";
 
 export default function Nav() {
   return (
-    <nav className=" relative lg:fixed top-0 left-0 z-50 grid w-full grid-cols-[1fr,2fr,1fr] px-12 py-8 text-zinc-600 dark:text-zinc-50">
+    <nav className=" relative lg:fixed top-0 left-0 z-50 grid w-full grid-cols-[1fr,2fr,1fr] px-6 sm:px-12 py-8 text-zinc-600">
       <a
         href="/"
         style={{ fontFamily: "Pacifico, cursive", fontSize: "32px" }}

@@ -1,0 +1,353 @@
+[
+
+    {
+        "order": 0,
+        "contentType": "TEXT",
+        "content": "I decided to draw a picture of my dog, Dodo, shown below: ",
+        "projectName": "Drawing Sketch - Dog"
+    },
+    {
+        "order": 1,
+        "contentType": "IMAGE",
+        "content": "https://link.storjshare.io/s/jwt5nk24wvgr7vakejs7pxzt3xsq/portfolio%2Fprojectcontent_57_1.jpeg?wrap=0",
+        "projectName": "Drawing Sketch - Dog"
+    },
+    {
+        "order": 2,
+        "contentType": "IMAGE",
+        "content": "https://link.storjshare.io/s/jvfkudzjbsoiedqckmaex4w3voba/portfolio%2Fprojectcontent_57_2.jpg?wrap=0",
+        "projectName": "Drawing Sketch - Dog"
+    },
+
+    {
+        "order": 0,
+        "contentType": "TEXT",
+        "content": "I found an image online of two rabbits side by side that would be cool to draw.",
+        "projectName": "Drawing Sketch - Rabbits"
+    },
+    {
+        "order": 1,
+        "contentType": "IMAGE",
+        "content": "https://link.storjshare.io/s/jxzlwq2gwmzjyvgmdnzbtba3ad7a/portfolio%2Fprojectcontent_58_1.jpeg?wrap=0",
+        "projectName": "Drawing Sketch - Rabbits"
+    },
+    {
+        "order": 2,
+        "contentType": "IMAGE",
+        "content": "https://link.storjshare.io/s/jubnmnj6iteybdcmsprlsj756x7a/portfolio%2Fprojectcontent_58_2.jpg?wrap=0",
+        "projectName": "Drawing Sketch - Rabbits"
+    },
+
+    {
+        "order": 0,
+        "contentType": "TEXT",
+        "content": "I found a post on instagram of two kittens cuddling and wanted to draw them. I also wanted to practice sketching fur. This sketch is currently my phone screensaver!",
+        "projectName": "Drawing Sketch - Cats"
+    },
+    {
+        "order": 1,
+        "contentType": "IMAGE",
+        "content": "https://link.storjshare.io/s/jx47bripicybd3bnf24aorkju5gq/portfolio%2Fprojectcontent_59_1.jpeg?wrap=0",
+        "projectName": "Drawing Sketch - Cats"
+    },
+    {
+        "order": 2,
+        "contentType": "IMAGE",
+        "content": "https://link.storjshare.io/s/jv3hmtesnslaeghv5t3e3cs34twq/portfolio%2Fprojectcontent_59_2.jpg?wrap=0",
+        "projectName": "Drawing Sketch - Cats"
+    },
+
+    {
+
+        "order": 0,
+        "contentType": "TEXT",
+        "content": "From August 2022 to May 2023, I was tasked to design and build a camera system for the Cornell University Autonomous Underwater Vehicle (CUAUV) team for the Polaris sub. This camera system would be used to capture images of the pool floor and walls to help the AUV navigate the pool specifically for the Zed Camera. The camera system would be mounted on the bottom of the AUV, and would be used to capture images of the pool floor and walls to help the AUV navigate the pool. ",
+        "projectName": "CUAUV Polaris Downcam"
+
+    },
+
+    {
+
+        "order": 1,
+        "contentType": "TEXT",
+        "content": "One of the primary changes from previous years downcam is that during our competitions, we had problem with lighting underwater. In order to counteract these problems, my design included a new LED lighting system and also a color palette to help adjust and calibrate the colors seen by the cameras. Given that previous cameras were much smaller, designs for the enclosures could easily be smaller and circular. However, given the new ZED camera that enables stereo vision, the enclosure had to be much larger and rectangular. Through multiple design reviews, alumni feedback, and many hours on SOLIDWORKs getting the perfect fit for the camera, the ZED Camera enclosure was ready to be manufactured, integrated, and be used during the annual Robosub competition.",
+        "projectName": "CUAUV Polaris Downcam"
+
+    },
+
+    {
+
+        "order": 2,
+        "contentType": "HEADING",
+        "content": "Polaris Downcam and Color Calibration Palette Technical Documentation",
+        "projectName": "CUAUV Polaris Downcam"
+
+    },
+
+
+    {
+
+        "order": 3,
+        "contentType": "FILE",
+        "content": "https://link.storjshare.io/s/jw3ty55anmalkegldawpohxs7ljq/portfolio%2FCUAUV_Polaris_Camera_Technical_Documentation.pdf?wrap=0",
+        "projectName": "CUAUV Polaris Downcam"
+
+    },
+
+    {
+
+        "order": 4,
+        "contentType": "TEXT",
+        "content": "The Technical Documentation offers insight into how the camera enclosure was designed. In particular it contains design constraints, materials used, mounting procedures, and calculations methods for future project team members to refer to when improving upon the design.",
+        "projectName": "CUAUV Polaris Downcam"
+
+    },
+
+    {
+
+        "order": 5,
+        "contentType": "HEADING",
+        "content": "Polaris Downcam and Color Calibration Palette User Manual",
+        "projectName": "CUAUV Polaris Downcam"
+
+    },
+
+    {
+
+        "order": 6,
+        "contentType": "FILE",
+        "content": "https://link.storjshare.io/s/jxkau6auebsoncmhgbouk6esohvq/portfolio%2FCUAUV_Polaris_Camera_Enclosures_User_Manual.pdf?wrap=0",
+        "projectName": "CUAUV Polaris Downcam"
+
+    },
+    {
+
+        "order": 7,
+        "contentType": "TEXT",
+        "content": "The User Manual offers a step-by-step guide on how to use and assemble the camera system. It includes instructions on how to mount the camera system onto the enclosure as well as how to setup the color calibration palette so that the viewport is not disrupted. ",
+        "projectName": "CUAUV Polaris Downcam"
+
+    },
+
+
+
+    {
+
+        "order": 0,
+        "contentType": "TEXT",
+        "content": "From January 2021 to January 2022, I was tasked to design and build a camera system for the Cornell University Autonomous Underwater Vehicle (CUAUV) team for the Aurora sub. This camera system would be used to capture images of the pool floor and walls to help the AUV navigate the pool using two cameras. One of the cameras would be mounted in a separate downward enclosure, another would be in a forward facing enclosure, and the last would be mounted in the UHPV (Upper Hull Pressure Vessel) pointing forward. This combination of cameras would allow a versatile view and would provide the software team with steroviion capability.",
+        "projectName": "CUAUV Aurora Downcam"
+
+    },
+
+    {
+
+        "order": 1,
+        "contentType": "TEXT",
+        "content": "One of the primary changes from previous years downcam to primarily improve the space complexity and integration experience of the components. A constraint that needs to be met for the annual Robosub competition is the overal vehicle's weight. To help achieve this goal, I optimized volume weight and volume achieving over 20% in reductions. Despite reductions, I was also able to design the mounting process to improve integration experience with the electrical subteam.",
+        "projectName": "CUAUV Aurora Downcam"
+
+    },
+
+    {
+
+        "order": 2,
+        "contentType": "HEADING",
+        "content": "Aurora Cameras Technical Documentation",
+        "projectName": "CUAUV Aurora Downcam"
+
+    },
+
+
+    {
+
+        "order": 3,
+        "contentType": "FILE",
+        "content": "https://link.storjshare.io/s/jxcqhyjv6wdve44sog63b6zi6ynq/portfolio%2FAurora%20Camera%20Enclosures.pdf?wrap=0",
+        "projectName": "CUAUV Aurora Downcam"
+
+    },
+
+    {
+
+        "order": 4,
+        "contentType": "TEXT",
+        "content": "The Technical Documentation offers insight into how the camera enclosure was designed. In particular it contains design constraints, materials used, mounting procedures, and calculations methods for future project team members to refer to when improving upon the design.",
+        "projectName": "CUAUV Aurora Downcam"
+
+    },
+
+    {
+
+        "order": 5,
+        "contentType": "HEADING",
+        "content": "Aurora Cameras User Manual",
+        "projectName": "CUAUV Aurora Downcam"
+
+    },
+
+    {
+
+        "order": 6,
+        "contentType": "FILE",
+        "content": "https://link.storjshare.io/s/jx4hq33essi7h76vxb46ntozjhsq/portfolio%2FAurora%20Camera%20Enclosures%20Manual.pdf?wrap=0",
+        "projectName": "CUAUV Aurora Downcam"
+
+    },
+    {
+
+        "order": 7,
+        "contentType": "TEXT",
+        "content": "The User Manual offers a step-by-step guide on how to use and assemble the camera system. It includes instructions on how to mount the camera system onto the forward and downward facing enclosures.",
+        "projectName": "CUAUV Aurora Downcam"
+
+    },
+
+    {
+
+
+        "order": 0,
+        "contentType":"LINK",
+        "content": "https://mikoliang.com/project/tubesort",
+        "projectName": "Tubesorting Game"
+    },
+
+
+    {
+
+
+        "order": 1,
+        "contentType":"HEADING",
+        "content": "Tubesort V1: Introduction",
+        "projectName": "Tubesorting Game"
+    },
+
+
+    {
+
+
+        "order": 2,
+        "contentType": "TEXT",
+        "content": "The Color-Tube game is a captivating puzzle that challenges players to sort the tube using strategy and logic. At the begining of the game, we have multiple tubes containing colored blocks and two empty tubes. Each tube can hold up to four blocks, and there are four blocks for each color in the game. The objective of the game is to strategically use the empty tubes to rearrange the blocks of different colors that are currently mixed in various tubes, placing blocks of the same color into the same tube.",
+        "projectName": "Tubesorting Game"
+    },
+    
+    {
+
+
+        "order": 3,
+        "contentType": "IMAGE",
+        "content": "https://link.storjshare.io/s/jxbtcrl74gm6t3qc4rcwpcg47cxq/portfolio%2Fprojectcontent_62_1.jpeg?wrap=0",
+        "projectName": "Tubesorting Game"
+    },
+    {
+
+
+        "order": 4,
+        "contentType": "TEXT",
+        "content": "My parents and friends all love this game. They enjoy spending their leisure time playing it. However, as the game progresses, the number of blocks and tubes increase, and some levels have trickly obstacles that make it difficult to come up with a solution. To keep the fun going, we need to create an automatic solving device that can take photos, analyze the position and colors of the blocks in the image, and use an efficient algorithm to generate the optimal solving strategy. The device can use an iPencil to implement this strategy in the game and complete the level.",
+        "projectName": "Tubesorting Game"
+    },
+    
+
+    {
+
+
+        "order": 5,
+        "contentType":"HEADING",
+        "content": "Design",
+        "projectName": "Tubesorting Game"
+    },
+    {
+
+        "order": 6,
+        "contentType":"TEXT",
+        "content": "The design process for this project includes writing the core algorithm, designing the structural framework, and implementing the computer vision (CV) routine.Throught this process, we encountered serval challenges, with two main issues standing out. Firstly, the selection of materials and fixing elements ofr the structrue posed a challenge. Initially, we planned to use acrylic sheets as the structural material for the device, connected using hot glue. Acrylic sheets were chosen for their transparency, as they allow for better visualizatio of the algorithm execution from various angles. To support this plan, we even created a strucural diagram using Fusion 360. However, during discussions, we realized that the acylic sheets were too thin, making it impossibel to drill holes on the sides. Additionally, fixing the slide rail on the acrylic sheets between problematic and was diffcult to accommodate in the design adjustments.As a result, we had to urgently revise our plan and opt for wooden boards and screws as the structural materials.",
+        "projectName": "Tubesorting Game"
+    },
+    {
+
+
+        "order": 7,
+        "contentType": "IMAGE",
+        "content": "https://link.storjshare.io/s/jvm7bve4yeu6aibqi7doq6mrlr3q/portfolio%2Fprojectcontent_62_2.jpeg?wrap=0",
+        "projectName": "Tubesorting Game"
+    },
+    {
+
+
+        "order": 8,
+        "contentType": "IMAGE",
+        "content": "https://link.storjshare.io/s/juhttz3vv6xp6a3ule5javgw7wlq/portfolio%2Fprojectcontent_62_4.jpeg?wrap=0",
+        "projectName": "Tubesorting Game"
+    },
+    {
+
+        "order": 9,
+        "contentType":"TEXT",
+        "content": "Secondly, concerning the CV routine, we encountered diffculties in accurately identifying the contours of the tubes and blocks. Sometimes, the blocks were not entirely detected, and at the other times, there were interfering contours present. We later discovered that proper adjustment of gray-scale levels was crucial for contour recognition. Simple gray-scale adjustment often resulted in local blurriness, causing some contours to be unrecognizable or unable to be eliminted. Using black-and-white image proved to be more suitable for identifying the countours of blocks in this game.",
+        "projectName": "Tubesorting Game"
+    },
+    {
+
+
+        "order": 10,
+        "contentType": "IMAGE",
+        "content": "https://link.storjshare.io/s/jxrgsw35unewhm2ohwpgmmvirpvq/portfolio%2Fprojectcontent_62_5.jpeg?wrap=0",
+        "projectName": "Tubesorting Game"
+    },
+    {
+
+        "order": 11,
+        "contentType":"TEXT",
+        "content": "Next up, was detecting the tubes. After simple threshold and the indentification of contours, we can easily use a warp transform on the padding out image from the Ipad. This will give us the four corners of the tube. We can then use the corners to find the center of the tube and map it out for the motors.",
+        "projectName": "Tubesorting Game"
+    },
+    {
+
+
+        "order": 12,
+        "contentType": "IMAGE",
+        "content": "https://link.storjshare.io/s/jufxw27te7754k4litpbzokddfnq/portfolio%2Fprojectcontent_62_6.jpeg?wrap=0",
+        "projectName": "Tubesorting Game"
+    },
+    {
+
+        "order": 13,
+        "contentType":"TEXT",
+        "content": "Similarly, color recognition posed a challenge. The color range recognition based on RGB values did bot provide helpful results. This was mainly due to the presence of multiple colors in some blocks, with RGB values that were relatively close. During our learning process, we discovered the K-Means algorithm, which calculates the average RGB values within a specific region. This algorithm proved to be helpful in identifying colors with a sepcific block area. Motor control was relatively simple as we just had to have a tight gear belt system to move linear blocks along a rail. Controlling it was also simple as we did a simple calculation to estimate how many steps for a 8 phase motor to move a certain distance. The final result for V1 is shown below:",
+        "projectName": "Tubesorting Game"
+    },
+    {
+
+
+        "order": 14,
+        "contentType": "IMAGE",
+        "content": "https://link.storjshare.io/s/jutgcrrmylbc4jcx4fwyhlz7pmxq/portfolio%2Fprojectcontent_62_3.jpeg?wrap=0",
+        "projectName": "Tubesorting Game"
+    },
+
+
+    {
+        "order": 0,
+        "contentType": "TEXT",
+        "content": "coming soon!!!",
+        "projectName": "DIY Keyboard"
+    }
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+]

@@ -10,16 +10,28 @@ datasource db {
 }
 
 model Project {
-  type        String[]
-  name        String   @unique
-  description String?
-  img         String?
-  projectTime String?
-  inProgress  Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  modifiedAt  DateTime @updatedAt
-  id          Int      @id @default(autoincrement())
-  projectLink String?
+  type           String[]
+  name           String           @unique
+  description    String?
+  img            String?
+  projectTime    String?
+  inProgress     Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  modifiedAt     DateTime         @updatedAt
+  id             Int              @id @default(autoincrement())
+  github         String?
+  projectContent ProjectContent[]
+}
+
+model ProjectContent {
+  id          Int         @id @default(autoincrement())
+  order       Int
+  contentType ContentType
+  content     String
+  projectId   Int
+  project     Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, order])
 }
 
 model TubeLevel {
@@ -87,4 +99,13 @@ model TubeColor {
 enum LevelType {
   REGULAR
   UNKNOWN
+}
+
+enum ContentType {
+  TEXT
+  IMAGE
+  VIDEO
+  HEADING
+  FILE
+  LINK
 }

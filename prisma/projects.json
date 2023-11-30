@@ -5,7 +5,7 @@
         ],
         "name": "CUAUV Aurora Downcam",
         "description": "downward facing camera for CUAUV Aurora",
-        "img": "https://i.imgur.com/67eIhr3.jpg",
+        "img": "https://link.storjshare.io/s/jue74jrvs36qafvnmsmtvogx6pjq/portfolio%2Fproject_56.jpeg?wrap=0",
         "date": "10/01/20-5/20/21",
         "inProgress": false
     },
@@ -13,9 +13,9 @@
         "type": [
             "Art"
         ],
-        "name": "Dodo Drawing 1",
+        "name": "Drawing Sketch - Dog",
         "description": "sketch of dodo",
-        "img": "https://i.imgur.com/E9f12gz.jpg",
+        "img": "https://link.storjshare.io/s/ju574mm5tzpe5c6qudip4lb4wd4q/portfolio%2Fproject_57.jpg?wrap=0",
         "date": "11/13/22",
         "inProgress": false
     },
@@ -23,9 +23,9 @@
         "type": [
             "Art"
         ],
-        "name": "Rabbit Drawing 1",
+        "name": "Drawing Sketch - Rabbits",
         "description": "sketch of rabbits",
-        "img": "https://i.imgur.com/ZmADncl.jpg",
+        "img": "https://link.storjshare.io/s/juvzuvmlnahxebsywwfp2h3vygta/portfolio%2Fproject_58.jpg?wrap=0",
         "date": "11/18/22",
         "inProgress": false
     },
@@ -33,9 +33,9 @@
         "type": [
             "Art"
         ],
-        "name": "Cat Drawing 1",
+        "name": "Drawing Sketch - Cats",
         "description": "sketch of cats",
-        "img": "https://i.imgur.com/QYGEDjn.jpg",
+        "img": "https://link.storjshare.io/s/juyhjjmejgefymzblx3ilfleuilq/portfolio%2Fproject_59.jpg?wrap=0",
         "date": "11/28/22",
         "inProgress": false
     },
@@ -45,7 +45,7 @@
         ],
         "name": "CUAUV Polaris Downcam",
         "description": "downward facing camera for Polaris",
-        "img": "https://i.imgur.com/yO79Tmz.jpg",
+        "img": "https://link.storjshare.io/s/jvqmkhmqmd6umitzuxkeqrhbnzyq/portfolio%2Fproject_60.jpg?wrap=0",
         "date": "10/01/21-5/20/22",
         "inProgress": false
     },
@@ -55,9 +55,9 @@
             "Mechanical",
             "Software"
         ],
-        "name": "custom keyboard",
+        "name": "DIY Keyboard",
         "description": "diy keyboard with custom keycaps",
-        "img": "https://i.imgur.com/JNnouUU.jpg",
+        "img": "https://link.storjshare.io/s/jujlcwafqsiwh753c7hzslzospcq/portfolio%2Fproject_61.jpg?wrap=0",
         "date": "12/18/22-TBA",
         "inProgress": true
     },
@@ -67,11 +67,12 @@
             "Mechanical",
             "Software"
         ],
-        "name": "tube sorting",
+        "name": "Tubesorting Game",
         "description": "machine to automatically play tube sort",
-        "img": "https://i.imgur.com/cHu4MyB.jpg",
+        "img": "https://link.storjshare.io/s/jwqdp2dzhl2oymvntktvu4hmk45a/portfolio%2Fproject_62.jpg?wrap=0",
         "date": "4/01/23-TBA",
         "inProgress": true,
-        "projectLink": "tubesort"
+        "github": "https://github.com/mikeyliang/tubesort"
+
     }
 ]
