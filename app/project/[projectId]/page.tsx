@@ -106,13 +106,17 @@ export default async function ProjectPage({
           console.log(content.contentType);
           if (content.contentType == "TEXT") {
             return (
-              <span className="ml-4 text-xl font-medium lg:ml-8 sm:w-3/4 text-zinc-700">
+              <span
+                key={`${project?.name}_content_${content.order}`}
+                className="ml-4 text-xl font-medium lg:ml-8 sm:w-3/4 text-zinc-700">
                 {content.content}
               </span>
             );
           } else if (content.contentType == "LINK") {
             return (
-              <div className="flex flex-row items-center justify-start ml-12 sm:w-3/4">
+              <div
+                key={`${project?.name}_content_${content.order}`}
+                className="flex flex-row items-center justify-start ml-12 sm:w-3/4">
                 <a href={content.content} target="_blank">
                   <Tag
                     bg_color="bg-blue-100"
@@ -125,7 +129,9 @@ export default async function ProjectPage({
             );
           } else if (content.contentType == "IMAGE") {
             return (
-              <div className="flex flex-row items-center justify-start ml-16 sm:w-3/4">
+              <div
+                key={`${project?.name}_content_${content.order}`}
+                className="flex flex-row items-center justify-start ml-16 sm:w-3/4">
                 <Image
                   alt={`${project?.name}`}
                   src={content.content}
@@ -137,13 +143,17 @@ export default async function ProjectPage({
             );
           } else if (content.contentType == "HEADING") {
             return (
-              <span className="text-2xl font-bold underline text-zinc-800">
+              <span
+                key={`${project?.name}_content_${content.order}`}
+                className="text-2xl font-bold underline text-zinc-800">
                 {content.content}
               </span>
             );
           } else if (content.contentType == "FILE") {
             return (
-              <div className="w-full md:w-3/4 lg:w-1/2">
+              <div
+                key={`${project?.name}_content_${content.order}`}
+                className="w-full md:w-3/4 lg:w-1/2">
                 <PDF src={content.content} />
               </div>
             );
