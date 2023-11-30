@@ -185,48 +185,52 @@ export default function TubeNavigator({
         />
       )}
 
-      <div className="flex items-center justify-center gap-4 text-sm font-semibold">
-        <button
-          className="flex flex-row items-center justify-center gap-2 px-2 py-1 rounded-md bg-zinc-200 hover:bg-zinc-300"
-          disabled={currentStep === 0}
-          onClick={() => setCurrentStep((prev) => Math.max(prev - 1, 0))}>
-          <IconArrowNarrowLeft />
-          <span>Previous</span>
-        </button>
+      <div className="flex flex-col items-center justify-center gap-4 text-sm font-semibold lg:flex-row">
+        <div className="flex flex-row items-center justify-center gap-4">
+          <button
+            className="flex flex-row items-center justify-center gap-2 px-2 py-1 rounded-md bg-zinc-200 hover:bg-zinc-300"
+            disabled={currentStep === 0}
+            onClick={() => setCurrentStep((prev) => Math.max(prev - 1, 0))}>
+            <IconArrowNarrowLeft />
+            <span>Prev</span>
+          </button>
 
-        <span>Current Move: {currentStep}</span>
-        <button
-          className="flex flex-row items-center justify-center gap-2 px-2 py-1 rounded-md hover:bg-zinc-300 bg-zinc-200"
-          disabled={currentStep === history.length - 1}
-          onClick={() =>
-            setCurrentStep((prev) => Math.min(prev + 1, tubeMoves.length))
-          }>
-          <span>Next</span>
-          <IconArrowNarrowRight />
-        </button>
+          <span className="flex-shrink-0">Move: {currentStep}</span>
+          <button
+            className="flex flex-row items-center justify-center gap-2 px-2 py-1 rounded-md hover:bg-zinc-300 bg-zinc-200"
+            disabled={currentStep === history.length - 1}
+            onClick={() =>
+              setCurrentStep((prev) => Math.min(prev + 1, tubeMoves.length))
+            }>
+            <span>Next</span>
+            <IconArrowNarrowRight />
+          </button>
+        </div>
+        <div className="flex flex-row items-center justify-center gap-4">
+          <button onClick={play}>
+            <Tag
+              hover_bg_color="hover:bg-green-300"
+              bg_color="bg-green-100"
+              txt_color="text-color-600">
+              <div className="flex flex-row items-center justify-center gap-1">
+                <IconPlayerPlayFilled className="p-1" />
+                <span>Play</span>
+              </div>
+            </Tag>
+          </button>
 
-        <button onClick={play}>
-          <Tag
-            hover_bg_color="hover:bg-green-300"
-            bg_color="bg-green-100"
-            txt_color="text-color-600">
-            <div className="flex flex-row items-center justify-center gap-1">
-              <IconPlayerPlayFilled className="p-1" />
-              <span>Play</span>
-            </div>
-          </Tag>
-        </button>
-        <button onClick={stop}>
-          <Tag
-            hover_bg_color="hover:bg-red-300"
-            bg_color="bg-red-100"
-            txt_color="text-red-600">
-            <div className="flex flex-row items-center justify-center gap-1">
-              <IconPlayerStopFilled className="p-1" />
-              <span>Stop</span>
-            </div>
-          </Tag>
-        </button>
+          <button onClick={stop}>
+            <Tag
+              hover_bg_color="hover:bg-red-300"
+              bg_color="bg-red-100"
+              txt_color="text-red-600">
+              <div className="flex flex-row items-center justify-center gap-1">
+                <IconPlayerStopFilled className="p-1" />
+                <span>Stop</span>
+              </div>
+            </Tag>
+          </button>
+        </div>
       </div>
     </div>
   );
