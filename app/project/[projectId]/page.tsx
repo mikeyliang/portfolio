@@ -78,18 +78,20 @@ export default async function ProjectPage({
               }   ${project?.name}`}
             </span>
 
-            <a href={project?.github ?? ""} target="_blank">
-              <Tag
-                hover_bg_color="hover:bg-zinc-200"
-                txt_color="text-zinc-600"
-                bg_color="bg-zinc-100">
-                <div className="flex flex-row items-center justify-center">
-                  <IconBrandGithubFilled className="p-1" />
+            {project?.github && (
+              <a href={project?.github ?? ""} target="_blank">
+                <Tag
+                  hover_bg_color="hover:bg-zinc-200"
+                  txt_color="text-zinc-600"
+                  bg_color="bg-zinc-100">
+                  <div className="flex flex-row items-center justify-center">
+                    <IconBrandGithubFilled className="p-1" />
 
-                  <span>Github Repo</span>
-                </div>
-              </Tag>
-            </a>
+                    <span>Github Repo</span>
+                  </div>
+                </Tag>
+              </a>
+            )}
           </div>
           <span className="mt-2 text-sm italic font-semibold sm:text-2xl text-zinc-500">
             {project?.description}
