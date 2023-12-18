@@ -37,11 +37,11 @@ export default async function ProjectPage({
     parseInt(params.projectId)
   );
   return (
-    <div className="flex flex-col w-full gap-12 p-8 bg-white border lg:gap-16 sm:p-16 rounded-3xl">
+    <div className="flex flex-col w-full gap-6 p-8 bg-white border md:gap-12 lg:gap-16 sm:p-16 rounded-3xl">
       <div className="flex flex-col-reverse items-start justify-between gap-4 lg:flex-row lg:gap-0">
         <div className="flex flex-col items-start justify-center gap-4">
-          <div className="flex flex-row items-center justify-center gap-4">
-            <div className="flex flex-row items-center justify-start gap-4">
+          <div className="flex flex-col-reverse items-start justify-center gap-4 xl:items-center xl:flex-row">
+            <div className="flex flex-row flex-wrap items-center justify-start gap-2 md:gap-4">
               {project?.type.map((t, index) => {
                 const colorInfo = getTypeColor(t.toString());
                 return (
@@ -49,17 +49,17 @@ export default async function ProjectPage({
                     key={t.toString()}
                     bg_color={colorInfo.bg_color}
                     txt_color={colorInfo.txt_color}>
-                    <span className="text-base">{t.toString()}</span>
+                    <span className="text-xs lg:text-base">{t.toString()}</span>
                   </Tag>
                 );
               })}
             </div>
             <div className="flex flex-row items-center justify-center gap-4 text-base">
-              <span className="font-semibold">{`ID ${project?.id}`}</span>
+              <span className="text-sm font-semibold md:text-base">{`ID ${project?.id}`}</span>
               {project?.inProgress ? (
                 <span className="flex flex-row items-center justify-center font-medium text-amber-500 ">
                   <IconPointFilled size={16} />
-                  In Progress
+                  <span className="text-sm md:text-base">In Progress</span>
                 </span>
               ) : (
                 <span className="flex flex-row items-center justify-center font-medium text-green-500 ">
@@ -69,8 +69,8 @@ export default async function ProjectPage({
               )}
             </div>
           </div>
-          <div className="flex flex-row items-end justify-center gap-4">
-            <span className="text-4xl font-extrabold sm:text-5xl text-zinc-700">
+          <div className="flex flex-col items-start justify-center gap-4 md:items-end md:flex-row">
+            <span className="text-3xl font-extrabold md:text-4xl sm:text-3xl xl:text-5xl text-zinc-700">
               {`${project?.type.includes("Art") ? "🎨" : ""}${
                 project?.type.includes("Mechanical") ? "⚙️" : ""
               } ${project?.type.includes("Electrical") ? "🔌" : ""} ${
@@ -87,7 +87,7 @@ export default async function ProjectPage({
                   <div className="flex flex-row items-center justify-center">
                     <IconBrandGithubFilled className="p-1" />
 
-                    <span>Github Repo</span>
+                    <span className="text-base md:text-lg">Github Repo</span>
                   </div>
                 </Tag>
               </a>
@@ -110,7 +110,7 @@ export default async function ProjectPage({
             return (
               <span
                 key={`${project?.name}_content_${content.order}`}
-                className="ml-4 text-xl font-medium lg:ml-8 sm:w-3/4 text-zinc-700">
+                className="ml-4 text-sm font-medium md:text-lg lg:ml-8 sm:w-3/4 text-zinc-700">
                 {content.content}
               </span>
             );
@@ -118,13 +118,13 @@ export default async function ProjectPage({
             return (
               <div
                 key={`${project?.name}_content_${content.order}`}
-                className="flex flex-row items-center justify-start ml-12 sm:w-3/4">
+                className="flex flex-row items-center justify-start ml-4 md:ml-12 sm:w-3/4">
                 <a href={content.content} target="_blank">
                   <Tag
                     bg_color="bg-blue-100"
                     txt_color="text-blue-600"
                     hover_bg_color="hover:bg-blue-300">
-                    <span className="text-lg">PROJECT LINK DEMO</span>
+                    <span className="text-sm lg:text-lg">PROJECT LINK DEMO</span>
                   </Tag>
                 </a>
               </div>
@@ -133,7 +133,7 @@ export default async function ProjectPage({
             return (
               <div
                 key={`${project?.name}_content_${content.order}`}
-                className="flex flex-row items-center justify-start ml-16 sm:w-3/4">
+                className="flex flex-row items-center justify-start ml-4 md:ml-16 sm:w-3/4">
                 <Image
                   alt={`${project?.name}`}
                   src={content.content}
@@ -147,7 +147,7 @@ export default async function ProjectPage({
             return (
               <span
                 key={`${project?.name}_content_${content.order}`}
-                className="text-2xl font-bold underline text-zinc-800">
+                className="text-lg font-bold underline md:text-2xl text-zinc-800">
                 {content.content}
               </span>
             );

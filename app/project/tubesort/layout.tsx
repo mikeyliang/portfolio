@@ -68,7 +68,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div
-        className={`flex flex-row items-start justify-center w-full md:w-auto h-full gap-6  sm:px-4 ${
+        className={`flex flex-row items-start justify-center w-full md:w-auto h-full gap-6 px-4 ${
           params.level ? "" : "bg-zinc-100"
         }`}>
         <div

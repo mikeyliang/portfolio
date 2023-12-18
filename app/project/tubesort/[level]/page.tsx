@@ -83,7 +83,7 @@ export default async function Page({
     <div className="flex flex-col items-start w-full gap-4">
       <a
         href="/project/tubesort"
-        className="flex flex-row items-center justify-center gap-2 px-2 py-1 text-sm font-bold bg-white border rounded-lg border-zinc-200 text-zinc-700 hover:bg-zinc-50">
+        className="flex flex-row items-center justify-center gap-2 px-2 py-1 text-sm font-bold bg-white border rounded-lg md:hidden border-zinc-200 text-zinc-700 hover:bg-zinc-50">
         <IconArrowNarrowLeft></IconArrowNarrowLeft>
         <span>level menu</span>
       </a>
