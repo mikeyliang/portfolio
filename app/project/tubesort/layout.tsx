@@ -72,7 +72,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           params.level ? "" : "bg-zinc-100"
         }`}>
         <div
-          className={`relative gap-6  xl:items-start w-full md:w-auto h-full max-w-[350px] sm:max-w-[390px] md:max-w-[360px] md:min-w-[360px] lg:max-w-[390px] lg:min-w-[390px] xl:max-w-[420px] xl:min-w-[420px] 2xl:max-w-[460px] 2xl:min-w-[460px] min-w-[385px] sm:min-w-[320px] ${
+          className={`relative gap-6  xl:items-start w-full md:w-auto h-full max-w-[320px] sm:max-w-[380px] md:max-w-[360px] md:min-w-[360px] lg:max-w-[390px] lg:min-w-[390px] xl:max-w-[420px] xl:min-w-[420px] 2xl:max-w-[460px] 2xl:min-w-[460px] min-w-[320px] sm:min-w-[385px] ${
             params.level
               ? "md:flex md:flex-col hidden"
               : "flex flex-col justify-start items-center"

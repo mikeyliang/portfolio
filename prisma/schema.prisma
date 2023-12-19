@@ -14,13 +14,18 @@ model Project {
   name           String           @unique
   description    String?
   img            String?
-  projectTime    String?
-  inProgress     Boolean          @default(true)
+  //projectTime    String?
+  //inProgress     Boolean          @default(true)
   createdAt      DateTime         @default(now())
   modifiedAt     DateTime         @updatedAt
   id             Int              @id @default(autoincrement())
   github         String?
   projectContent ProjectContent[]
+
+  projectStartYear  Int? //if null, project is in progress
+  projectStartMonth Int?
+  projectEndYear    Int?
+  projectEndMonth   Int?
 }
 
 model ProjectContent {

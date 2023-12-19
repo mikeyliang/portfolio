@@ -6,8 +6,10 @@
         "name": "CUAUV Aurora Downcam",
         "description": "downward facing camera for CUAUV Aurora",
         "img": "https://link.storjshare.io/s/jue74jrvs36qafvnmsmtvogx6pjq/portfolio%2Fproject_56.jpeg?wrap=0",
-        "date": "10/01/20-5/20/21",
-        "inProgress": false
+        "projectStartYear": 2020,
+        "projectStartMonth": 10,
+        "projectEndYear": 2021,
+        "projectEndMonth": 5
     },
     {
         "type": [
@@ -16,8 +18,8 @@
         "name": "Drawing Sketch - Dog",
         "description": "sketch of dodo",
         "img": "https://link.storjshare.io/s/ju574mm5tzpe5c6qudip4lb4wd4q/portfolio%2Fproject_57.jpg?wrap=0",
-        "date": "11/13/22",
-        "inProgress": false
+        "projectEndYear": 2022,
+        "projectEndMonth": 11
     },
     {
         "type": [
@@ -26,53 +28,55 @@
         "name": "Drawing Sketch - Rabbits",
         "description": "sketch of rabbits",
         "img": "https://link.storjshare.io/s/juvzuvmlnahxebsywwfp2h3vygta/portfolio%2Fproject_58.jpg?wrap=0",
-        "date": "11/18/22",
-        "inProgress": false
+        "projectEndYear": 2022,
+        "projectEndMonth": 11
     },
     {
-        "type": [
-            "Art"
-        ],
+        "type": ["Art"],
         "name": "Drawing Sketch - Cats",
         "description": "sketch of cats",
         "img": "https://link.storjshare.io/s/juyhjjmejgefymzblx3ilfleuilq/portfolio%2Fproject_59.jpg?wrap=0",
-        "date": "11/28/22",
-        "inProgress": false
+        "projectStartYear": 2022,
+        "projectStartMonth": 11
     },
     {
-        "type": [
-            "Mechanical"
-        ],
+        "type": ["Mechanical"],
         "name": "CUAUV Polaris Downcam",
         "description": "downward facing camera for Polaris",
         "img": "https://link.storjshare.io/s/jvqmkhmqmd6umitzuxkeqrhbnzyq/portfolio%2Fproject_60.jpg?wrap=0",
-        "date": "10/01/21-5/20/22",
-        "inProgress": false
+        "projectStartYear": 2021,
+        "projectStartMonth": 10,
+        "projectEndYear": 2022,
+        "projectEndMonth": 5
     },
     {
-        "type": [
-            "Electrical",
-            "Mechanical",
-            "Software"
-        ],
+        "type": ["Electrical", "Mechanical", "Software"],
         "name": "DIY Keyboard",
         "description": "diy keyboard with custom keycaps",
         "img": "https://link.storjshare.io/s/jujlcwafqsiwh753c7hzslzospcq/portfolio%2Fproject_61.jpg?wrap=0",
-        "date": "12/18/22-TBA",
-        "inProgress": true
+        "projectStartYear": 2022,
+        "projectStartMonth": 12
     },
     {
-        "type": [
-            "Electrical",
-            "Mechanical",
-            "Software"
-        ],
+        "type": ["Electrical", "Mechanical", "Software"],
         "name": "Tubesorting Game",
         "description": "machine to automatically play tube sort",
         "img": "https://link.storjshare.io/s/jwqdp2dzhl2oymvntktvu4hmk45a/portfolio%2Fproject_62.jpg?wrap=0",
-        "date": "4/01/23-TBA",
-        "inProgress": true,
+        "projectStartYear": 2023,
+        "projectStartMonth": 4,
         "github": "https://github.com/mikeyliang/tubesort"
+    },
+    {
+        "type": [
+            "Design"
+        ],
+        "name": "ECommerce Website-Drift",
+        "description": "designed and coded a starting site for drift",
+        "img": "https://link.storjshare.io/s/jwwgw334qibtpt2fxjizq7s2eyrq/portfolio%2Fportfolio_project_8.png?wrap=0",
+        "projectStartYear": 2022,
+        "projectStartMonth": 7,
+        "projectEndYear": 2022,
+        "projectEndMonth": 8
 
     }
 ]

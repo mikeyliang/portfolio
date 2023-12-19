@@ -3,6 +3,9 @@ import Tag from "./Tag";
 import type { Tag as TagType } from "../types/project";
 import { IconPointFilled, IconEye } from "@tabler/icons-react";
 
+
+import { formatProjectDate } from "../lib/project";
+
 // Define a function to map ProjectTag to corresponding bg_color and txt_color
 export function getTypeColor(tag: string) {
   switch (tag) {
@@ -21,17 +24,24 @@ export function getTypeColor(tag: string) {
   }
 }
 
-type CardProps<T extends { toString(): string }> = {
+type ProjectCardProps<T extends { toString(): string }> = {
   id: number;
-  date: string | null;
-  inProgress?: boolean;
+  projectStartYear?: number | null;
+  projectEndYear?: number | null;
+  projectStartMonth?: number | null;
+  projectEndMonth?: number | null;
   types: T[];
   children: React.ReactNode;
 };
 
-export default function Card<T extends { toString(): string }>(
-  props: CardProps<T>
+
+export default function ProjectCard<T extends { toString(): string }>(
+  props: ProjectCardProps<T>
 ) {
+
+  const inProgress = !(props.projectEndYear && props.projectEndMonth);
+
+    
   return (
     <div
       key={props.id}
@@ -40,7 +50,7 @@ export default function Card<T extends { toString(): string }>(
         <Tag bg_color="bg-white shadow">
           <div className="flex flex-row gap-2">
             {`ID ${props.id}`}
-            {props.inProgress ? (
+            {inProgress ? (
               <span className="flex flex-row items-center justify-center text-xs font-medium text-amber-500 ">
                 <IconPointFilled size={16} />
                 In Progress
@@ -62,7 +72,7 @@ export default function Card<T extends { toString(): string }>(
       </div>
 
       <span className="absolute z-10 flex flex-col items-end justify-start gap-2 text-xs font-medium top-4 right-6 text-zinc-500">
-        <Tag bg_color="bg-white shadow">{props.date}</Tag>
+        <Tag bg_color="bg-white shadow">{formatProjectDate({projectStartMonth: props.projectStartMonth, projectStartYear: props.projectStartYear, projectEndMonth: props.projectEndMonth, projectEndYear: props.projectEndYear}, inProgress)}</Tag>
       </span>
 
       {props.types && props.types.length > 0 && (

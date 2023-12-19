@@ -13,7 +13,7 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 import Tag from "../components/Tag";
-import Card from "../components/Card";
+import ProjectCard from "../components/ProjectCard";
 import Clock from "../components/Clock";
 
 import { Project, ProjectType } from "../types/project";
@@ -265,11 +265,13 @@ export default function Home() {
                     }
                   `}
                 </style>
-                <Card
+                <ProjectCard
                   types={project.type as ProjectType[]}
                   id={project.id}
-                  inProgress={project.inProgress}
-                  date={project.projectTime}>
+                  projectStartYear={project.projectStartYear}
+                  projectEndYear={project.projectEndYear}
+                  projectStartMonth={project.projectStartMonth}
+                  projectEndMonth={project.projectEndMonth}>
                   <div
                     className={` ${
                       project.type.some((type) => type == "Art")
@@ -289,7 +291,7 @@ export default function Home() {
             
                     )}
                   </div>
-                </Card>
+                </ProjectCard>
               </a>
             );
           })}

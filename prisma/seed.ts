@@ -18,8 +18,11 @@ async function seed() {
           name: project.name,
           description: project.description,
           img: project.img,
-          projectTime: project.date,
-          inProgress: project.inProgress,
+          github: project.githubLink,
+          projectStartYear: project.projectStartYear ?? null,
+          projectStartMonth: project.projectStartMonth ?? null,
+          projectEndYear: project.projectEndYear ?? null,
+          projectEndMonth: project.projectEndMonth ?? null,
         },
       });
     }
