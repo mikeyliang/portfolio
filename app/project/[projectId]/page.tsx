@@ -1,9 +1,11 @@
-import { getTypeColor } from "@/components/Card";
+import { getTypeColor } from "@/components/ProjectCard";
 import prisma from "../../../lib/prisma";
 import Tag from "@/components/Tag";
 import Image from "next/image";
 import { IconBrandGithubFilled, IconPointFilled } from "@tabler/icons-react";
 import PDF from "@/components/PDF";
+
+import { formatProjectDate } from "../../../lib/project";
 
 async function getProjectData(projectId: number) {
   console.log(projectId);
@@ -22,8 +24,6 @@ async function getProjectData(projectId: number) {
     },
   });
 
-  console.log(projectContent);
-  console.log(project);
 
   return { project, projectContent };
 }
@@ -36,6 +36,10 @@ export default async function ProjectPage({
   const { project, projectContent } = await getProjectData(
     parseInt(params.projectId)
   );
+  const inProgress = !(project?.projectEndMonth && project?.projectEndYear);
+
+  
+
   return (
     <div className="flex flex-col w-full gap-6 p-8 bg-white border md:gap-12 lg:gap-16 sm:p-16 rounded-3xl">
       <div className="flex flex-col-reverse items-start justify-between gap-4 lg:flex-row lg:gap-0">
@@ -56,7 +60,7 @@ export default async function ProjectPage({
             </div>
             <div className="flex flex-row items-center justify-center gap-4 text-base">
               <span className="text-sm font-semibold md:text-base">{`ID ${project?.id}`}</span>
-              {project?.inProgress ? (
+              {inProgress ? (
                 <span className="flex flex-row items-center justify-center font-medium text-amber-500 ">
                   <IconPointFilled size={16} />
                   <span className="text-sm md:text-base">In Progress</span>
@@ -99,7 +103,15 @@ export default async function ProjectPage({
         </div>
 
         <div className="flex flex-row items-center justify-between gap-1 text-xl font-semibold whitespace-nowrap sm:gap-3 lg:flex-col xl:flex-row text-zinc-700">
-          <span className="flex-grow font-bold text-zinc-800">{`📅 ${project?.projectTime}`}</span>
+          <span className="flex-grow font-bold text-zinc-800">{`📅 ${formatProjectDate(
+            {
+              projectStartMonth: project?.projectStartMonth,
+              projectStartYear: project?.projectStartMonth,
+              projectEndMonth: project?.projectEndMonth,
+              projectEndYear: project?.projectEndYear,
+            },
+            inProgress
+          )}`}</span>
         </div>
       </div>
 
@@ -124,7 +136,9 @@ export default async function ProjectPage({
                     bg_color="bg-blue-100"
                     txt_color="text-blue-600"
                     hover_bg_color="hover:bg-blue-300">
-                    <span className="text-sm lg:text-lg">PROJECT LINK DEMO</span>
+                    <span className="text-sm lg:text-lg">
+                      PROJECT LINK DEMO
+                    </span>
                   </Tag>
                 </a>
               </div>
