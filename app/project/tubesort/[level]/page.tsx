@@ -87,7 +87,7 @@ export default async function Page({
         <IconArrowNarrowLeft></IconArrowNarrowLeft>
         <span>level menu</span>
       </a>
-      <div className="flex flex-col w-full gap-16 p-8 bg-white border md:p-12 rounded-2xl border-zinc-200">
+      <div className="flex flex-col w-full gap-16 p-8 bg-white border shadow md:p-12 rounded-2xl border-zinc-200">
         <div className="flex flex-row items-end justify-start gap-4">
           <span className="text-xl font-extrabold">LEVEL:</span>
           <span className="px-4 py-2 text-4xl font-extrabold rounded-2xl bg-zinc-200 text-zinc-800">

@@ -23,10 +23,17 @@ const NextOptions: NextAuthOptions = {
 
   callbacks: {
     async signIn({ account, user}) {
-      if (account?.provider === "oauth" && user) {
+
+      if (user && account?.provider === "google") {
+    
         return true;
       }
       return false;
+    },
+
+    async session({ session, user, token }) {
+        session.user.role = user.role;
+      return session;
     },
   },
   secret: process.env.AUTH_SECRET,

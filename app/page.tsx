@@ -18,6 +18,10 @@ import Clock from "../components/Clock";
 
 import { Project, ProjectType } from "../types/project";
 
+
+
+import {useSession} from "next-auth/react";
+
 import dynamic from "next/dynamic";
 
 const LoadingAnimation = dynamic(
@@ -38,9 +42,11 @@ const typeOptions = [
 export default function Home() {
   const [typeFilter, setTypeFilter] = useState<ProjectType[]>(typeOptions);
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
-
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const {data: session} = useSession();
+
+  console.log(session);
 
   function toggleTypeFilter(category: ProjectType) {
     setTypeFilter((prevTypeFilter) => {
@@ -95,7 +101,7 @@ export default function Home() {
         <LoadingAnimation></LoadingAnimation>
       ) : (
         <div className="flex flex-col items-center justify-center gap-6">
-          <div className="flex flex-col w-full gap-12 p-8 bg-white border sm:p-12 lg:gap-24 md:p-16 rounded-3xl">
+          <div className="flex flex-col w-full gap-12 p-8 bg-white border shadow sm:p-12 lg:gap-24 md:p-16 rounded-3xl">
             <div className="flex flex-col-reverse items-start justify-between gap-4 lg:flex-row lg:gap-0">
               <div className="flex flex-col gap-8 bg-white rounded-2xl">
                 <div className="flex flex-row flex-wrap items-center gap-1 text-base font-bold md:text-lg lg:text-xl sm:text-2xl text-zinc-500">
@@ -296,7 +302,7 @@ export default function Home() {
                           project.type.some((type) => type == "Art")
                             ? "vignette_art"
                             : "vignette"
-                        } h-full flex-col justify-center items-center`}>
+                        } h-full flex-col justify-center items-center shadow`}>
                         {project.img && (
                           <div className="flex flex-col justify-center h-full">
                             <Image

@@ -31,7 +31,7 @@ export default function RootLayout({
       <body className={`${inter.variable}  bg-zinc-100`}>
         <main>
           <NextAuthProvider>
-            <div className="h-auto max-h-full px-8 lg:py-24 sm:px-16 lg:p-52 lg:px-52 ">
+            <div className="h-auto max-h-full px-8 pb-16 lg:py-24 sm:px-16 lg:p-52 ">
               <Nav />
               <PDFWorker>{children}</PDFWorker>
             </div>

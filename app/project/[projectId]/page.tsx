@@ -8,7 +8,6 @@ import PDF from "@/components/PDF";
 import { formatProjectDate } from "../../../lib/project";
 
 async function getProjectData(projectId: number) {
-  console.log(projectId);
   const project = await prisma.project.findUnique({
     where: {
       id: projectId,
@@ -41,7 +40,7 @@ export default async function ProjectPage({
 
 
   return (
-    <div className="flex flex-col w-full gap-6 p-8 bg-white border md:gap-12 lg:gap-16 sm:p-16 rounded-3xl">
+    <div className="flex flex-col w-full gap-6 p-8 bg-white border shadow md:gap-12 lg:gap-16 sm:p-16 rounded-3xl">
       <div className="flex flex-col-reverse items-start justify-between gap-4 lg:flex-row lg:gap-0">
         <div className="flex flex-col items-start justify-center gap-4">
           <div className="flex flex-col-reverse items-start justify-center gap-4 xl:items-center xl:flex-row">
@@ -117,7 +116,6 @@ export default async function ProjectPage({
 
       <div className="flex flex-col items-start justify-center gap-12 md:gap-16">
         {projectContent?.map((content, index) => {
-          console.log(content.contentType);
           if (content.contentType == "TEXT") {
             return (
               <span
@@ -153,7 +151,7 @@ export default async function ProjectPage({
                   src={content.content}
                   width={300}
                   height={300}
-                  className="rounded-lg"
+                  className="rounded-xl"
                 />
               </div>
             );
