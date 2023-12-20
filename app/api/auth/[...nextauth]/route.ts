@@ -6,7 +6,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import  prisma from "../../../../lib/prisma";
 import type { NextAuthOptions } from "next-auth";
 
-export const NextOptions: NextAuthOptions = {
+const NextOptions: NextAuthOptions = {
   session: {
     strategy: "database",
   },

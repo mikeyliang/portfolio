@@ -24,8 +24,10 @@ async function getProjectData(projectId: number) {
     },
   });
 
+  const projectInProgress = !(project?.projectEndMonth && project?.projectEndYear);
 
-  return { project, projectContent };
+
+  return { project, projectContent, projectInProgress };
 }
 
 export default async function ProjectPage({
@@ -33,12 +35,10 @@ export default async function ProjectPage({
 }: {
   params: { projectId: string };
 }) {
-  const { project, projectContent } = await getProjectData(
+  const { project, projectContent, projectInProgress } = await getProjectData(
     parseInt(params.projectId)
   );
-  const inProgress = !(project?.projectEndMonth && project?.projectEndYear);
 
-  
 
   return (
     <div className="flex flex-col w-full gap-6 p-8 bg-white border md:gap-12 lg:gap-16 sm:p-16 rounded-3xl">
@@ -60,7 +60,7 @@ export default async function ProjectPage({
             </div>
             <div className="flex flex-row items-center justify-center gap-4 text-base">
               <span className="text-sm font-semibold md:text-base">{`ID ${project?.id}`}</span>
-              {inProgress ? (
+              {projectInProgress ? (
                 <span className="flex flex-row items-center justify-center font-medium text-amber-500 ">
                   <IconPointFilled size={16} />
                   <span className="text-sm md:text-base">In Progress</span>
@@ -110,7 +110,7 @@ export default async function ProjectPage({
               projectEndMonth: project?.projectEndMonth,
               projectEndYear: project?.projectEndYear,
             },
-            inProgress
+            projectInProgress
           )}`}</span>
         </div>
       </div>

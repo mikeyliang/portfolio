@@ -29,7 +29,7 @@ export default function PDF(props: PDFProps) {
   // search instance
   const searchPluginInstance = searchPlugin();
 
-  function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
+  function onLoadSuccess({ numPages }: { numPages: number }): void {
     setNumPages(numPages);
   }
   return (
