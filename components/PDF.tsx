@@ -40,7 +40,7 @@ export default function PDF(props: PDFProps) {
           border: "1px solid rgba(0, 0, 0, 0.3)",
           display: "flex",
           flexDirection: "column",
-          height: "1100px",
+          height: "700px",
         }}>
         <div
           style={{
