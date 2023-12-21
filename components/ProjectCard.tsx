@@ -46,7 +46,7 @@ export default function ProjectCard<T extends { toString(): string }>(
     <div
       key={props.id}
       className="relative flex flex-col w-full h-full max-h-full gap-24 bg-white border max-w-fit rounded-3xl">
-      <div className="absolute z-10 flex flex-col items-start justify-start gap-2 text-xs font-medium top-4 left-6 text-zinc-500">
+      <div className="absolute z-10 flex flex-col items-start justify-start gap-2 text-xs font-medium top-4 left-4 text-zinc-500">
         <Tag bg_color="bg-white shadow">
           <div className="flex flex-row gap-2">
             {`ID ${props.id}`}
@@ -71,12 +71,12 @@ export default function ProjectCard<T extends { toString(): string }>(
         )} */}
       </div>
 
-      <span className="absolute z-10 flex flex-col items-end justify-start gap-2 text-xs font-medium top-4 right-6 text-zinc-500">
+      <span className="absolute z-10 flex flex-col items-end justify-start gap-2 text-xs font-medium top-4 right-4 text-zinc-500">
         <Tag bg_color="bg-white shadow">{formatProjectDate({projectStartMonth: props.projectStartMonth, projectStartYear: props.projectStartYear, projectEndMonth: props.projectEndMonth, projectEndYear: props.projectEndYear}, inProgress)}</Tag>
       </span>
 
       {props.types && props.types.length > 0 && (
-        <div className="absolute z-10 flex flex-row flex-wrap items-center justify-end gap-2 bottom-4 right-6">
+        <div className="absolute z-10 flex flex-row flex-wrap items-center justify-end gap-2 bottom-4 right-4">
           {props.types.map((type, index) => {
             const colorInfo = getTypeColor(type.toString());
             return (

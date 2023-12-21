@@ -1,10 +1,14 @@
 import "./globals.css";
+import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
+import "@mantine/dropzone/styles.css";
 import { Inter } from "next/font/google";
 
 import Nav from "../components/Nav";
 import { NextAuthProvider } from "./provider";
 import {PDFWorker} from "./worker";
 
+import { MantineProvider } from "@mantine/core";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -30,12 +34,14 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable}  bg-zinc-100`}>
         <main>
-          <NextAuthProvider>
-            <div className="h-auto max-h-full px-8 pb-16 lg:py-24 sm:px-16 lg:p-52 ">
-              <Nav />
-              <PDFWorker>{children}</PDFWorker>
-            </div>
-          </NextAuthProvider>
+          <MantineProvider>
+            <NextAuthProvider>
+              <div className="h-auto max-h-full px-8 pb-16 lg:py-24 sm:px-16 lg:p-52 ">
+                <Nav />
+                <PDFWorker>{children}</PDFWorker>
+              </div>
+            </NextAuthProvider>
+          </MantineProvider>
         </main>
       </body>
     </html>
