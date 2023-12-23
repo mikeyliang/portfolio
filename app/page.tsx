@@ -306,6 +306,7 @@ export default function Home() {
                     key={`proj_${project.id}`}
                     types={project.type as ProjectType[]}
                     id={project.id}
+                    editable={session?.user.role === "ADMIN"}
                     projectStartYear={project.projectStartYear}
                     projectEndYear={project.projectEndYear}
                     projectStartMonth={project.projectStartMonth}

@@ -37,6 +37,7 @@ type ProjectCardProps<T extends { toString(): string }> = {
   projectStartMonth?: number | null;
   projectEndMonth?: number | null;
   types: T[];
+  editable: boolean;
   setEditingProjectID: (id: number) => void;
   children: React.ReactNode;
 };
@@ -51,7 +52,7 @@ export default function ProjectCard<T extends { toString(): string }>(
     
   return (
     <div
-      key={`proj_${props.id}`}
+      
       className="relative flex flex-col items-center justify-center w-full h-full max-h-full gap-24 bg-white border max-w-fit rounded-3xl">
       <div className="absolute z-10 flex flex-col items-start justify-start gap-2 text-xs font-medium top-4 left-4 text-zinc-500">
         <Tag bg_color="bg-white shadow">
@@ -84,6 +85,7 @@ export default function ProjectCard<T extends { toString(): string }>(
             inProgress
           )}
         </Tag>
+        {props.editable &&
         <div className="flex flex-col items-end justify-center gap-2">
           <Tag
             bg_color="bg-yellow-200"
@@ -111,7 +113,9 @@ export default function ProjectCard<T extends { toString(): string }>(
               <IconTrashXFilled stroke={2.5} />
             </button>
           </Tag> */}
+        
         </div>
+}
       </span>
 
       {props.types && props.types.length > 0 && (
