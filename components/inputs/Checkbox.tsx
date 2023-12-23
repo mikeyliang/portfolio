@@ -4,6 +4,7 @@ type CheckboxProps = {
     label: MantineCheckboxProps["label"];
     checked: boolean;
     setChecked: React.Dispatch<React.SetStateAction<boolean>>;
+    
     };
 
 export default function Checkbox(props: CheckboxProps) {

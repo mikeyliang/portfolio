@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   MultiSelect as MantineMultiSelect,
   MultiSelectProps,
@@ -6,16 +5,11 @@ import {
 import { IconCheck } from "@tabler/icons";
 
 
-function MultiSelect({ data, label, placeholder }: MultiSelectProps) {
-  const [value, setValue] = useState<string[]>([]);
-
- 
+function MultiSelect(props: MultiSelectProps) {
   return (
  
       <MantineMultiSelect
-        label={label}
-        placeholder={placeholder}
-        data={data}
+        {...props}
         searchable
         nothingFoundMessage="Nothing found..."
         comboboxProps={{

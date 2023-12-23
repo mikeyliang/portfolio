@@ -29,7 +29,7 @@ function Color({ red, green, blue }: ColorProps) {
 
   return (
     <div
-      className="w-8 h-8 border border-gray-300 rounded-full"
+      className="w-5 h-5 border border-gray-300 rounded-full sm:w-8 sm:h-8"
       style={{ backgroundColor: bgColor }}></div>
   );
 }
@@ -48,7 +48,7 @@ function Tubes({ step, tubeIndex, colors, allColors }: TubeProps) {
       {Array.from({ length: 4 - colors.length }).map((_, index) => (
         <div
           key={`layout-${step}_${tubeIndex}-empty-${index}`} // unique and stable key
-          className="w-8 h-8 border border-gray-200 rounded-full"></div>
+          className="w-5 h-5 border border-gray-200 rounded-full sm:w-8 sm:h-8"></div>
       ))}
       {[...colors].reverse().map((colorIndex, index) => {
         const color = allColors.find((c) => c.colorIndex === colorIndex);

@@ -1,7 +1,13 @@
 import React from "react";
 import Tag from "./Tag";
 import type { Tag as TagType } from "../types/project";
-import { IconPointFilled, IconEye } from "@tabler/icons-react";
+import {
+  IconPointFilled,
+  IconEyeEdit,
+  IconEditCircle,
+  IconTrashXFilled
+} from "@tabler/icons-react";
+
 
 
 import { formatProjectDate } from "../lib/project";
@@ -31,6 +37,7 @@ type ProjectCardProps<T extends { toString(): string }> = {
   projectStartMonth?: number | null;
   projectEndMonth?: number | null;
   types: T[];
+  setEditingProjectID: (id: number) => void;
   children: React.ReactNode;
 };
 
@@ -44,8 +51,8 @@ export default function ProjectCard<T extends { toString(): string }>(
     
   return (
     <div
-      key={props.id}
-      className="relative flex flex-col w-full h-full max-h-full gap-24 bg-white border max-w-fit rounded-3xl">
+      key={`proj_${props.id}`}
+      className="relative flex flex-col items-center justify-center w-full h-full max-h-full gap-24 bg-white border max-w-fit rounded-3xl">
       <div className="absolute z-10 flex flex-col items-start justify-start gap-2 text-xs font-medium top-4 left-4 text-zinc-500">
         <Tag bg_color="bg-white shadow">
           <div className="flex flex-row gap-2">
@@ -63,16 +70,48 @@ export default function ProjectCard<T extends { toString(): string }>(
             )}
           </div>
         </Tag>
-        {/* {props.link && (
-          <div className="flex flex-row items-center justify-center gap-1 px-2 py-1 text-xs bg-blue-200 rounded-full hover:bg-blue-300 text-zinc-700">
-            <span>Preview</span>
-            <IconEye size={12} />
-          </div>
-        )} */}
       </div>
 
-      <span className="absolute z-10 flex flex-col items-end justify-start gap-2 text-xs font-medium top-4 right-4 text-zinc-500">
-        <Tag bg_color="bg-white shadow">{formatProjectDate({projectStartMonth: props.projectStartMonth, projectStartYear: props.projectStartYear, projectEndMonth: props.projectEndMonth, projectEndYear: props.projectEndYear}, inProgress)}</Tag>
+      <span className="absolute z-10 flex flex-col items-end justify-start gap-4 text-xs font-medium top-4 right-4 text-zinc-500">
+        <Tag bg_color="bg-white shadow">
+          {formatProjectDate(
+            {
+              projectStartMonth: props.projectStartMonth,
+              projectStartYear: props.projectStartYear,
+              projectEndMonth: props.projectEndMonth,
+              projectEndYear: props.projectEndYear,
+            },
+            inProgress
+          )}
+        </Tag>
+        <div className="flex flex-col items-end justify-center gap-2">
+          <Tag
+            bg_color="bg-yellow-200"
+            hover_bg_color="hover:bg-yellow-300"
+            txt_color="text-yellow-700">
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation(); 
+                
+                props.setEditingProjectID(-1);
+                setTimeout(() => props.setEditingProjectID(props.id), 0);
+              }}
+              className="flex items-center justify-center w-5 h-6 p-0.5">
+              <IconEyeEdit stroke={2.5} />
+            </button>
+          </Tag>
+          {/* TODO: add in delete for project (confirmation screen) TODO: <Tag
+            bg_color="bg-red-200"
+            hover_bg_color="hover:bg-red-300"
+            txt_color="text-red-700">
+            <button
+              type="button"
+              className="flex items-center justify-center w-5 h-6 p-0.5">
+              <IconTrashXFilled stroke={2.5} />
+            </button>
+          </Tag> */}
+        </div>
       </span>
 
       {props.types && props.types.length > 0 && (

@@ -6,6 +6,7 @@ const nextConfig = {
       "i.imgur.com",
       "imgur.com",
       "link.storjshare.io",
+      "firebasestorage.googleapis.com",
     ],
   },
   webpack: (config, { isServer }) => {

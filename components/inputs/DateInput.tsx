@@ -1,19 +1,16 @@
-import { useState } from "react";
 import { DateInput as MantineDateInput, DateInputProps } from "@mantine/dates";
+import React from "react";
 
-export default function DateInput({label, placeholder}: DateInputProps) {
-  const [value, setValue] = useState<Date | null>(null);
+export default function DateInput(props: DateInputProps) {
+  const safeValue = props.value instanceof Date ? props.value : null;
+
   return (
     <MantineDateInput
-      value={value}
-      onChange={setValue}
-      label={label}
-      placeholder={placeholder}
+      {...props}
+      value={safeValue} 
       radius="md"
       clearable
-      defaultValue={new Date()}
-      valueFormat="MM/YYYY"
-      withAsterisk
+      valueFormat="MM/YYYY" 
     />
   );
 }

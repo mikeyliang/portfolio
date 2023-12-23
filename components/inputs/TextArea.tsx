@@ -1,12 +1,11 @@
 import { Textarea as MantineTextArea, TextareaProps } from "@mantine/core";
 
-export default function TextArea({label, placeholder} : TextareaProps) {
+export default function TextArea(props : TextareaProps) {
   return (
     <MantineTextArea
       radius="md"
-      label={label}
       withAsterisk
-      placeholder={placeholder}
+      {...props}
     />
   );
 }

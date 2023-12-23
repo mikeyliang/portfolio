@@ -4,8 +4,13 @@ import Tag from "@/components/Tag";
 import Image from "next/image";
 import { IconBrandGithubFilled, IconPointFilled } from "@tabler/icons-react";
 import PDF from "@/components/PDF";
+import Link from "next/link";
 
 import { formatProjectDate } from "../../../lib/project";
+
+import dynamic from "next/dynamic";
+
+const RedirectLink = dynamic(() => import("@/components/RedirectLink"), { ssr: false });
 
 async function getProjectData(projectId: number) {
   const project = await prisma.project.findUnique({
@@ -23,8 +28,9 @@ async function getProjectData(projectId: number) {
     },
   });
 
-  const projectInProgress = !(project?.projectEndMonth && project?.projectEndYear);
-
+  const projectInProgress = !(
+    project?.projectEndMonth && project?.projectEndYear
+  );
 
   return { project, projectContent, projectInProgress };
 }
@@ -37,7 +43,6 @@ export default async function ProjectPage({
   const { project, projectContent, projectInProgress } = await getProjectData(
     parseInt(params.projectId)
   );
-
 
   return (
     <div className="flex flex-col w-full gap-6 p-8 bg-white border shadow md:gap-12 lg:gap-16 sm:p-16 rounded-3xl">
@@ -82,18 +87,18 @@ export default async function ProjectPage({
             </span>
 
             {project?.github && (
-              <a href={project?.github ?? ""} target="_blank">
-                <Tag
-                  hover_bg_color="hover:bg-zinc-200"
-                  txt_color="text-zinc-600"
-                  bg_color="bg-zinc-100">
+              <Tag
+                hover_bg_color="hover:bg-zinc-200"
+                txt_color="text-zinc-600"
+                bg_color="bg-zinc-100">
+                <RedirectLink href={project.github}>
                   <div className="flex flex-row items-center justify-center">
                     <IconBrandGithubFilled className="p-1" />
 
                     <span className="text-base md:text-lg">Github Repo</span>
                   </div>
-                </Tag>
-              </a>
+                </RedirectLink>
+              </Tag>
             )}
           </div>
           <span className="mt-2 text-sm italic font-semibold sm:text-2xl text-zinc-500">
@@ -127,18 +132,18 @@ export default async function ProjectPage({
           } else if (content.contentType == "LINK") {
             return (
               <div
-                key={`${project?.name}_content_${content.order}`}
-                className="flex flex-row items-center justify-start ml-4 md:ml-12 sm:w-3/4">
-                <a href={content.content} target="_blank">
-                  <Tag
-                    bg_color="bg-blue-100"
-                    txt_color="text-blue-600"
-                    hover_bg_color="hover:bg-blue-300">
+                className="flex flex-row items-center justify-start ml-4 md:ml-12 sm:w-3/4"
+                key={`${project?.name}_content_${content.order}`}>
+                <Tag
+                  bg_color="bg-blue-100"
+                  txt_color="text-blue-600"
+                  hover_bg_color="hover:bg-blue-300">
+                  <RedirectLink href={content.content}>
                     <span className="text-sm lg:text-lg">
                       PROJECT LINK DEMO
                     </span>
-                  </Tag>
-                </a>
+                  </RedirectLink>
+                </Tag>
               </div>
             );
           } else if (content.contentType == "IMAGE") {
@@ -149,9 +154,9 @@ export default async function ProjectPage({
                 <Image
                   alt={`${project?.name}`}
                   src={content.content}
-                  width={300}
-                  height={300}
-                  className="rounded-xl"
+                  width={400}
+                  height={400}
+                  className="h-auto rounded-xl"
                 />
               </div>
             );

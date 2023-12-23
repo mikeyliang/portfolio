@@ -19,3 +19,13 @@ export type ProjectType =
   | "Software" // Color: bg-green-400 (Green)
   | "Mechanical" // Color: bg-red-500 (Red)
   | "Electrical"; // Color: bg-orange-400 (Orange)
+
+export type ProjectFormValues = {
+   projectName: string;
+   projectDescription: string;
+   projectTypes: ProjectType[];
+   projectStart: string | Date | null;
+   projectEnd: string | Date | null;
+   projectFile: File | string | null;
+   projectGithub: string | null;
+};

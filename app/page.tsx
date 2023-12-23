@@ -18,23 +18,16 @@ import Tag from "../components/Tag";
 import ProjectCard from "../components/ProjectCard";
 import Clock from "../components/Clock";
 
-import { Project, ProjectType } from "../types/project";
+import { Project, ProjectFormValues, ProjectType } from "../types/project";
 
 import { useSession } from "next-auth/react";
 
 import dynamic from "next/dynamic";
 
-import { zodResolver } from "mantine-form-zod-resolver";
-import { z } from "zod";
-import { useForm } from "@mantine/form";
-
-import Modal from "@/components/Modal";
-import MultiSelect from "@/components/inputs/Multiselect";
-import TextInput from "@/components/inputs/TextInput";
-import TextArea from "@/components/inputs/TextArea";
-import DateInput from "@/components/inputs/DateInput";
-import Checkbox from "@/components/inputs/Checkbox";
-import FileInput from "@/components/inputs/FileInput";
+const ProjectForm = dynamic(
+  () => import("@/components/ProjectForm"),
+  { ssr: false } 
+);
 
 const LoadingAnimation = dynamic(
   () => import("../components/LoadingAnimation"),
@@ -50,44 +43,32 @@ const typeOptions = [
   "Electrical",
 ] as ProjectType[];
 
+
+const defaultForm = {
+  projectName: "",
+  projectDescription: "",
+  projectTypes: [],
+  projectStart: null,
+  projectEnd: null,
+  projectFile: null,
+  projectGithub: null,
+};
+
 export default function Home() {
   const [typeFilter, setTypeFilter] = useState<ProjectType[]>(typeOptions);
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [addProjectModalOpen, setAddProjectModalOpen] =
+  const [projectModalOpen, setProjectModalOpen] =
     useState<boolean>(false);
-
-  const [projectFinished, setProjectFinished] = useState<boolean>(false);
 
   const { data: session } = useSession();
 
-  const schema = z.object({
-    projectName: z.string().min(1, "Project Name is required"),
-    projectDescription: z.string().min(1, "Project Description is required"),
-    projectTypes: z.array(z.string()).min(1, "At least one Project Type is required"),
-    projectStart: z.date().optional(),
-    projectEnd: z.date().optional(),
-  });
+  const [projectFormData, setProjectFormData] = useState <ProjectFormValues>(defaultForm)
+      
+  const [projectFormType, setProjectFormType] = useState<"create" | "edit">("create")
 
-  // Initialize the form
-  const form = useForm({
-    validate: zodResolver(schema),
-    initialValues: {
-      projectName: '',
-      projectDescription: '',
-      projectTypes: [],
-      projectStart: null,
-      projectEnd: null,
-    },
-  });
-
-
-  function handleSubmit(values: any) {
-    console.log(values);
-    // Your submission logic here
-    setAddProjectModalOpen(false);
-  };
+  const [editingProjectID, setEditingProjectID] = useState<number>(-1);
 
   function toggleTypeFilter(category: ProjectType) {
     setTypeFilter((prevTypeFilter) => {
@@ -135,6 +116,38 @@ export default function Home() {
 
     fetchData();
   }, [typeFilter]);
+
+
+  // clicked on edit for individual project card
+  useEffect(() => {
+    const formData = filteredProjects.find(
+      (project) => project.id === editingProjectID
+    );
+
+    if (formData) {
+      setProjectFormData({
+        projectName: formData.name || "",
+        projectDescription: formData.description || "",
+        projectTypes: (formData.type as ProjectType[]) || [],
+        projectStart:
+          formData.projectStartMonth && formData.projectStartYear ? new Date(formData.projectStartYear, formData.projectStartMonth-1, 1) : null,
+        projectEnd:
+          formData.projectEndMonth && formData.projectEndYear ? new Date(formData.projectEndYear, formData.projectEndMonth-1, 1) : null,
+        projectFile: formData.img || null,
+        projectGithub: formData.github || null,
+      });
+
+    }
+  }, [editingProjectID, filteredProjects]);
+
+  useEffect(() => {
+    if (editingProjectID !== -1) {
+      setProjectModalOpen(true);
+      setProjectFormType("edit");
+    } else {
+      setProjectModalOpen(false);
+    }
+  }, [editingProjectID]);
 
   return (
     <>
@@ -271,7 +284,9 @@ export default function Home() {
                   txt_color="text-green-600">
                   <button
                     onClick={() => {
-                      setAddProjectModalOpen(true);
+                      setProjectFormType("create");
+                      setProjectFormData(defaultForm);
+                      setProjectModalOpen(true);
                     }}
                     type="button"
                     className="flex flex-row items-center justify-center">
@@ -279,102 +294,7 @@ export default function Home() {
                     <span className="text-sm">Add Work | Project</span>
                   </button>
                 </Tag>
-                <Modal
-                  isOpen={addProjectModalOpen}
-                  setIsOpen={setAddProjectModalOpen}>
-                  <form onSubmit={form.onSubmit(handleSubmit)}>
-                    <div className="flex flex-col items-start justify-center text-gray-500 gap-y-16">
-                      <div className="flex flex-col items-start justify-center gap-1">
-                        <span className="text-2xl font-extrabold text-zinc-700">
-                          🚧 Create a new Project
-                        </span>
-                        <p className="font-medium text-gray-500">
-                          Fill in information below to add in a work or a
-                          project
-                        </p>
-                        <div className="w-full p-4 pb-0">
-                          <TextInput
-                            label="Project Name"
-                            placeholder="Enter a name"
-                            {...form.getInputProps("projectName")}
-                          />
-                        </div>
-                        <div className="w-full p-4 pb-0 ">
-                          <TextArea
-                            label="Project Description"
-                            placeholder="Enter a description"
-                            {...form.getInputProps("projectDescription")}
-                          />
-                        </div>
-                        <div className="w-full p-4 pb-0">
-                          <MultiSelect
-                            label="Project Types"
-                            placeholder="Select Types"
-                            data={typeOptions.filter((c) => c !== "All")}
-                            {...form.getInputProps("projectTypes")}
-                          />
-                        </div>
-                        <div className="w-full p-4 pb-0 ">
-                          <DateInput
-                            label="Project Start"
-                            placeholder="Select a Start Date"
-                            {...form.getInputProps("projectStart")}
-                          />
-                        </div>
-                        {projectFinished && (
-                          <div className="w-full px-4">
-                            <DateInput
-                              label="Project End"
-                              placeholder="Select a End Date"
-                              {...form.getInputProps("projectEnd")}
-                            />
-                          </div>
-                        )}
-                        <div className="w-full p-4 pb-0 ">
-                          <Checkbox
-                            label={"Project Finished?"}
-                            checked={projectFinished}
-                            setChecked={setProjectFinished}
-                          />
-                        </div>
-
-                        <div className="w-full p-4 pb-0 ">
-                          <FileInput {...form.getInputProps("projectFile")} />
-                        </div>
-                      </div>
-
-                      <div className="flex flex-row items-center justify-end w-full gap-3">
-                        <Tag
-                          hover_bg_color="hover:bg-green-200"
-                          bg_color="bg-green-50"
-                          txt_color="text-green-500">
-                          <button
-                            type="submit"
-                            onClick={() => {
-                              setAddProjectModalOpen(false);
-                            }}
-                            className="flex flex-row items-center justify-center gap-2">
-                            <IconCircleCheckFilled size={16} />
-                            Add
-                          </button>
-                        </Tag>
-                        <Tag
-                          hover_bg_color="hover:bg-red-200"
-                          bg_color="bg-red-50"
-                          txt_color="text-red-500">
-                          <button
-                            onClick={() => {
-                              setAddProjectModalOpen(false);
-                            }}
-                            className="flex flex-row items-center justify-center gap-2">
-                            <IconCircleXFilled size={16} />
-                            Cancel
-                          </button>
-                        </Tag>
-                      </div>
-                    </div>
-                  </form>
-                </Modal>
+                
               </>
             )}
           </div>
@@ -382,76 +302,78 @@ export default function Home() {
             {filteredProjects &&
               filteredProjects.map((project) => {
                 return (
-                  <a
-                    key={project.name}
-                    className={`w-full col-span-1 cursor-pointer`}
-                    href={`/project/${project.id}`}>
-                    <style jsx>
-                      {`
-                        .vignette_art {
-                          position: relative;
-                          overflow: hidden;
-                          border-radius: 1.5rem;
-                        }
+                  <ProjectCard
+                    key={`proj_${project.id}`}
+                    types={project.type as ProjectType[]}
+                    id={project.id}
+                    projectStartYear={project.projectStartYear}
+                    projectEndYear={project.projectEndYear}
+                    projectStartMonth={project.projectStartMonth}
+                    projectEndMonth={project.projectEndMonth}
+                    setEditingProjectID={setEditingProjectID}>
+                    <a
+                      key={project.name}
+                      className={`w-full col-span-1 cursor-pointer`}
+                      href={`/project/${project.id}`}>
+                      <style jsx>
+                        {`
+                          .vignette_art {
+                            position: relative;
+                            overflow: hidden;
+                            border-radius: 1.5rem;
+                          }
 
-                        .vignette_art::before {
-                          content: "";
-                          position: absolute;
+                          .vignette_art::before {
+                            content: "";
+                            position: absolute;
 
-                          left: 0;
-                          width: 100%;
-                          height: 100%;
-                          background: radial-gradient(
-                            ellipse at center,
-                            rgba(0, 0, 0, 0) 0%,
-                            rgba(255, 255, 255, 1) 75%
-                          );
-                        }
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: radial-gradient(
+                              ellipse at center,
+                              rgba(0, 0, 0, 0) 0%,
+                              rgba(255, 255, 255, 1) 75%
+                            );
+                          }
 
-                        .vignette_art:hover::before {
-                          background: radial-gradient(
-                            ellipse at center,
-                            rgba(0, 0, 0, 0) 0%,
-                            rgba(255, 255, 255, 1) 80%
-                          );
-                        }
+                          .vignette_art:hover::before {
+                            background: radial-gradient(
+                              ellipse at center,
+                              rgba(0, 0, 0, 0) 0%,
+                              rgba(255, 255, 255, 1) 80%
+                            );
+                          }
 
-                        .vignette {
-                          position: relative;
-                          overflow: hidden;
-                          border-radius: 1.5rem;
-                        }
+                          .vignette {
+                            position: relative;
+                            overflow: hidden;
+                            border-radius: 1.5rem;
+                          }
 
-                        .vignette::before {
-                          content: "";
-                          position: absolute;
-                          top: 0;
-                          left: 0;
-                          width: 100%;
-                          height: 100%;
-                          background: radial-gradient(
-                            ellipse at center,
-                            rgba(0, 0, 0, 0) 0%,
-                            rgba(255, 255, 255, 0.2) 65%
-                          );
-                        }
+                          .vignette::before {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: radial-gradient(
+                              ellipse at center,
+                              rgba(0, 0, 0, 0) 0%,
+                              rgba(255, 255, 255, 0.2) 65%
+                            );
+                          }
 
-                        .vignette:hover::before {
-                          background: radial-gradient(
-                            ellipse at center,
-                            rgba(0, 0, 0, 0) 0%,
-                            rgba(255, 255, 255, 0.2) 80%
-                          );
-                        }
-                      `}
-                    </style>
-                    <ProjectCard
-                      types={project.type as ProjectType[]}
-                      id={project.id}
-                      projectStartYear={project.projectStartYear}
-                      projectEndYear={project.projectEndYear}
-                      projectStartMonth={project.projectStartMonth}
-                      projectEndMonth={project.projectEndMonth}>
+                          .vignette:hover::before {
+                            background: radial-gradient(
+                              ellipse at center,
+                              rgba(0, 0, 0, 0) 0%,
+                              rgba(255, 255, 255, 0.2) 80%
+                            );
+                          }
+                        `}
+                      </style>
                       <div
                         className={` ${
                           project.type.some((type) => type == "Art")
@@ -459,7 +381,7 @@ export default function Home() {
                             : "vignette"
                         } h-full flex-col justify-center items-center shadow`}>
                         {project.img && (
-                          <div className="flex flex-col justify-center h-full">
+                          <div className="flex flex-col items-center justify-center h-full">
                             <Image
                               className="object-cover rounded-4xl"
                               width={1000}
@@ -470,13 +392,15 @@ export default function Home() {
                           </div>
                         )}
                       </div>
-                    </ProjectCard>
-                  </a>
+                    </a>
+                  </ProjectCard>
                 );
               })}
           </div>
         </div>
       )}
+
+      <ProjectForm projectModalOpen={projectModalOpen} setProjectModalOpen={setProjectModalOpen} data={projectFormData} formType={projectFormType} projectId={editingProjectID}/>
     </>
   );
 }

@@ -34,15 +34,15 @@ export default function TubeLevelCard(props: TubeLevelCardProps) {
       </div>
       <div className="flex flex-row items-center justify-between w-full">
         <div className="flex flex-row items-center justify-start w-full gap-2">
-          <span className="px-2 py-1 text-sm font-semibold rounded-md bg-amber-100">
+          <span className="px-2 py-1 text-xs font-semibold rounded-md sm:text-sm bg-amber-100">
             Moves: {props.tubeLevel._count.tubeMoves}
           </span>
 
-          <span className="px-2 py-1 text-sm font-semibold bg-blue-100 rounded-md">
+          <span className="px-2 py-1 text-xs font-semibold bg-blue-100 rounded-md sm:text-sm">
             Tubes: {props.tubeLevel.tubes && props.tubeLevel.tubes.length}
           </span>
         </div>
-        <span className="px-2 py-1 text-sm font-bold rounded-md bg-lime-200">
+        <span className="px-2 py-1 text-xs font-bold rounded-md sm:text-sm bg-lime-200">
           {props.tubeLevel.type}
         </span>
       </div>

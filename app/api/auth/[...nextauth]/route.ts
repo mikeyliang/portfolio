@@ -4,40 +4,7 @@ import Providers from "next-auth/providers";
 
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import  prisma from "../../../../lib/prisma";
-import type { NextAuthOptions } from "next-auth";
-
-const NextOptions: NextAuthOptions = {
-  session: {
-    strategy: "database",
-  },
-  adapter: PrismaAdapter(prisma),
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-  ],
-  pages: {
-    error: "/", //TODO: add in error page?
-  },
-
-  callbacks: {
-    async signIn({ account, user}) {
-
-      if (user && account?.provider === "google") {
-    
-        return true;
-      }
-      return false;
-    },
-
-    async session({ session, user, token }) {
-        session.user.role = user.role;
-      return session;
-    },
-  },
-  secret: process.env.AUTH_SECRET,
-};
+import {NextOptions} from "@/lib/next-auth";
 
 const handler = NextAuth(NextOptions);
 
