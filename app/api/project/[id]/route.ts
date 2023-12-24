@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { NextOptions } from "@/lib/next-auth"
-import NextAuth, { AuthOptions, getServerSession } from "next-auth";
 
 export async function GET(
   req: Request,
@@ -10,6 +8,9 @@ export async function GET(
  
   const project = await prisma.project.findUnique({
     where: { id: parseInt(params.id) },
+    include: {
+        projectContent: true
+    }
   });
   // Send response
   return NextResponse.json(project);

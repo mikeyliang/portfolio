@@ -17,7 +17,6 @@ export default function FileUpload({ error, ...props }: FileInputProps) {
   const [file, setFile] = useState<File | undefined>();
   const [previewUrl, setPreviewUrl] = useState<string | undefined>(props.file as string | undefined);
 
-  console.log(file);
   function handleFileChange(file: File | null) {
     if (file) {
       setFile(file);

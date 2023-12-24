@@ -1,9 +1,10 @@
-import { Prisma, Project as ProjecType } from "@prisma/client";
+import { Prisma, Project as PrismaProjectType, ProjectContent as PrismaProjectContentType } from "@prisma/client";
 
 import { Group, Category, Attribute } from "./enums.d";
 
 // project
-export type Project = ProjecType;
+export type Project = PrismaProjectType;
+export type ProjectContent = PrismaProjectContentType
 
 
 // TODO: fix tag and projecttypes for Tag component. using <T>

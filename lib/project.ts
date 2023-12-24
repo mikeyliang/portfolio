@@ -11,15 +11,11 @@ export function formatProjectDate(date: ProjectDateType, inProgress: boolean) {
   let dateRange = "";
 
   if (date.projectStartYear && date.projectStartMonth) {
-    startDate = `${date.projectStartMonth < 10 ? `0${date.projectStartMonth}` : date.projectStartMonth}/${date.projectStartYear}`;
+    startDate = `${date.projectStartMonth}/${date.projectStartYear}`;
   }
 
   if (date.projectEndYear && date.projectEndMonth) {
-    endDate = `${
-      date.projectEndMonth < 10
-        ? `0${date.projectEndMonth}`
-        : date.projectEndMonth
-    }/${date.projectEndYear}`;
+    endDate = `${date.projectEndMonth}/${date.projectEndYear}`;
   } else if (inProgress) {
     endDate = "TBA";
   }

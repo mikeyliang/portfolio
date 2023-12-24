@@ -1,14 +1,12 @@
 import { getTypeColor } from "@/components/ProjectCard";
-import prisma from "../../../lib/prisma";
+import prisma from "@/lib/prisma";
 import Tag from "@/components/Tag";
-import Image from "next/image";
 import { IconBrandGithubFilled, IconPointFilled } from "@tabler/icons-react";
-import PDF from "@/components/PDF";
-import Link from "next/link";
 
-import { formatProjectDate } from "../../../lib/project";
+import { formatProjectDate } from "@/lib/project";
 
 import dynamic from "next/dynamic";
+import ProjectContent from "@/components/ProjectContentCard";
 
 const RedirectLink = dynamic(() => import("@/components/RedirectLink"), { ssr: false });
 
@@ -110,7 +108,7 @@ export default async function ProjectPage({
           <span className="flex-grow font-bold text-zinc-800">{`📅 ${formatProjectDate(
             {
               projectStartMonth: project?.projectStartMonth,
-              projectStartYear: project?.projectStartMonth,
+              projectStartYear: project?.projectStartYear,
               projectEndMonth: project?.projectEndMonth,
               projectEndYear: project?.projectEndYear,
             },
@@ -120,65 +118,11 @@ export default async function ProjectPage({
       </div>
 
       <div className="flex flex-col items-start justify-center gap-12 md:gap-16">
-        {projectContent?.map((content, index) => {
-          if (content.contentType == "TEXT") {
-            return (
-              <span
-                key={`${project?.name}_content_${content.order}`}
-                className="ml-4 text-sm font-medium md:text-lg lg:ml-8 sm:w-3/4 text-zinc-700">
-                {content.content}
-              </span>
-            );
-          } else if (content.contentType == "LINK") {
-            return (
-              <div
-                className="flex flex-row items-center justify-start ml-4 md:ml-12 sm:w-3/4"
-                key={`${project?.name}_content_${content.order}`}>
-                <Tag
-                  bg_color="bg-blue-100"
-                  txt_color="text-blue-600"
-                  hover_bg_color="hover:bg-blue-300">
-                  <RedirectLink href={content.content}>
-                    <span className="text-sm lg:text-lg">
-                      PROJECT LINK DEMO
-                    </span>
-                  </RedirectLink>
-                </Tag>
-              </div>
-            );
-          } else if (content.contentType == "IMAGE") {
-            return (
-              <div
-                key={`${project?.name}_content_${content.order}`}
-                className="flex flex-row items-center justify-start ml-4 md:ml-16 sm:w-3/4">
-                <Image
-                  alt={`${project?.name}`}
-                  src={content.content}
-                  width={400}
-                  height={400}
-                  className="h-auto rounded-xl"
-                />
-              </div>
-            );
-          } else if (content.contentType == "HEADING") {
-            return (
-              <span
-                key={`${project?.name}_content_${content.order}`}
-                className="text-lg font-bold underline md:text-2xl text-zinc-800">
-                {content.content}
-              </span>
-            );
-          } else if (content.contentType == "FILE") {
-            return (
-              <div
-                key={`${project?.name}_content_${content.order}`}
-                className="w-full md:w-3/4 lg:w-1/2">
-                <PDF src={content.content} />
-              </div>
-            );
-          }
-        })}
+        {project?.name && projectContent?.map((content, index) => 
+          <ProjectContent content={{content: content.content, contentType: content.contentType, order: content.order}} projectName={project?.name}/>
+        )}
       </div>
     </div>
   );
 }
+
