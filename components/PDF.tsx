@@ -35,7 +35,7 @@ export default function PDF(props: PDFProps) {
   return (
     <>
       <div
-        className="rpv-core__viewer"
+        className="w-full rpv-core__viewer"
         style={{
           border: "1px solid rgba(0, 0, 0, 0.3)",
           display: "flex",
@@ -49,6 +49,7 @@ export default function PDF(props: PDFProps) {
 
             display: "flex",
             padding: "4px",
+            width: "100%",
           }}>
           <DownloadButton />
         </div>

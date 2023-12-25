@@ -6,6 +6,7 @@ import {
 } from "@mantine/core";
 import { IconPhoto } from "@tabler/icons-react";
 import Image from "next/image";
+import PDF from "../PDF";
 
 type FileInputProps = {
   fileType: "image/*" | "application/*" | "audio/*" | "video/*";
@@ -21,17 +22,20 @@ export default function FileUpload({ error, ...props }: FileInputProps) {
     if (file) {
       setFile(file);
       const fileUrl = URL.createObjectURL(file);
+      if (props.onFileChange) {
+        props.onFileChange(file); // Call the callback with the new file
+      }
       setPreviewUrl(fileUrl);
     } else {
       setPreviewUrl(undefined);
     }
   }
 
-  const fetchImageAsFile = async (imageUrl: string) => {
+  const fetchImageAsFile = async (fileUrl: string) => {
     try {
-      const response = await fetch(imageUrl);
+      const response = await fetch(fileUrl);
       const blob = await response.blob();
-      const file = new File([blob], "preview_img", { type: blob.type });
+      const file = new File([blob], `${props.fileType=="image/*" ?  "preview_img" : "preview_file"}`, { type: blob.type });
       setFile(file);
       if (props.onFileChange) {
         props.onFileChange(file); // Call the callback with the new file
@@ -43,7 +47,7 @@ export default function FileUpload({ error, ...props }: FileInputProps) {
   };
 
   useEffect(() => {
-    if (props.file && typeof props.file === "string") {
+    if (props.file && typeof props.file === "string" ) {
       fetchImageAsFile(props.file as string);
     }
 
@@ -55,16 +59,16 @@ export default function FileUpload({ error, ...props }: FileInputProps) {
     <div className="flex flex-col items-start justify-center w-full gap-6">
       <FileInput
         leftSection={icon}
+        {...props}
         placeholder="Upload image"
         value={file}
         label="Project Cover Photo"
-        onChange={(file)=>handleFileChange(file)}
+        onChange={(file) => handleFileChange(file)}
         accept="image/*"
         radius="md"
         className="w-full"
         withAsterisk
-        error={error} 
-      
+        error={error}
       />
 
       {previewUrl && props.fileType == "image/*" && (
@@ -79,6 +83,11 @@ export default function FileUpload({ error, ...props }: FileInputProps) {
             className="w-24 border-2 rounded-xl h-100 border-zinc-200"
             loading="lazy"
           />
+        </div>
+      )}
+      {previewUrl && props.fileType == "application/*" && file?.type.split("/")[1] == "pdf" && (
+        <div className="w-1/2 h-auto">
+          <PDF src={previewUrl} />
         </div>
       )}
     </div>

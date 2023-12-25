@@ -1,12 +1,12 @@
 import { getTypeColor } from "@/components/ProjectCard";
 import prisma from "@/lib/prisma";
 import Tag from "@/components/Tag";
-import { IconBrandGithubFilled, IconPointFilled } from "@tabler/icons-react";
+import { IconBrandGithubFilled, IconFilePencil, IconPointFilled } from "@tabler/icons-react";
 
 import { formatProjectDate } from "@/lib/project";
 
 import dynamic from "next/dynamic";
-import ProjectContent from "@/components/ProjectContentCard";
+import ProjectContentCard from "@/components/ProjectContentCard";
 
 const RedirectLink = dynamic(() => import("@/components/RedirectLink"), { ssr: false });
 
@@ -104,7 +104,7 @@ export default async function ProjectPage({
           </span>
         </div>
 
-        <div className="flex flex-row items-center justify-between gap-1 text-xl font-semibold whitespace-nowrap sm:gap-3 lg:flex-col xl:flex-row text-zinc-700">
+        <div className="flex flex-row items-end justify-between gap-4 text-xl font-semibold sm:gap-3 lg:flex-col whitespace-nowrap text-zinc-700">
           <span className="flex-grow font-bold text-zinc-800">{`📅 ${formatProjectDate(
             {
               projectStartMonth: project?.projectStartMonth,
@@ -114,13 +114,30 @@ export default async function ProjectPage({
             },
             projectInProgress
           )}`}</span>
+
+          <RedirectLink href={`/project/edit/${project?.id}`}>
+            <Tag
+              txt_color="text-yellow-500"
+              bg_color="bg-yellow-100"
+              hover_bg_color="hover:bg-yellow-200">
+              <div className="flex flex-row items-center justify-center gap-1 text-sm">
+                <IconFilePencil size={18} />
+                <span>Edit</span>
+              </div>
+            </Tag>
+          </RedirectLink>
         </div>
       </div>
 
       <div className="flex flex-col items-start justify-center gap-12 md:gap-16">
-        {project?.name && projectContent?.map((content, index) => 
-          <ProjectContent content={{content: content.content, contentType: content.contentType, order: content.order}} projectName={project?.name}/>
-        )}
+        {project?.name &&
+          projectContent?.map((content, index) => (
+            <ProjectContentCard
+              key={`project-content-${index}`}
+              content={{ ...content }}
+              projectName={project?.name}
+            />
+          ))}
       </div>
     </div>
   );
