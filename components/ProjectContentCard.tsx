@@ -98,7 +98,7 @@ export default function ProjectContentCard(props: ProjectContentProps) {
                 txt_color="text-blue-600"
                 hover_bg_color="hover:bg-blue-300">
                 <RedirectLink href={props.content.content}>
-                  <span className="text-sm lg:text-lg">PROJECT LINK DEMO</span>
+                  <button className="text-sm cursor-pointer lg:text-lg">PROJECT LINK DEMO</button>
                 </RedirectLink>
               </Tag>
             </div>
@@ -119,7 +119,7 @@ export default function ProjectContentCard(props: ProjectContentProps) {
             />
           ) : (
             <div
-              className="flex flex-col items-start justify-start ml-4 md:ml-16 sm:w-3/4">
+              className="flex flex-col items-start justify-start ml-4 md:ml-8 sm:w-3/4">
               <Image
                 alt={`${props.projectName}`}
                 src={props.content.content}
