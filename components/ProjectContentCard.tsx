@@ -20,7 +20,7 @@ type ProjectContentProps = {
   content: ProjectContent;
   projectName: string;
   editMode?: boolean;
-  onChange?: (id: number, value: ProjectContent) => void;
+  onChange?: (order: number, value: ProjectContent) => void;
 };
 
 export default function ProjectContentCard(props: ProjectContentProps) {
@@ -33,7 +33,7 @@ export default function ProjectContentCard(props: ProjectContentProps) {
       ...props.content,
       content: e.target.value,
     };
-    props.onChange?.(props.content.id, updatedContent);
+    props.onChange?.(props.content.order, updatedContent);
   }
 
   function handleFileChange(eventOrFile: File | null) {
@@ -47,9 +47,7 @@ export default function ProjectContentCard(props: ProjectContentProps) {
           ...props.content,
           content: fileURL,
         };
-
-        console.log(updatedContent);
-        props.onChange?.(props.content.id, updatedContent);
+        props.onChange?.(props.content.order, updatedContent);
       }
     }
   }
@@ -65,9 +63,7 @@ export default function ProjectContentCard(props: ProjectContentProps) {
                 placeholder="Enter text"
                 value={props.content.content}
                 leftSection={<IconTextSize />}
-                onChange={(e) => {
-                  handleTextChange(e);
-                }}
+                onChange={handleTextChange}
               />
           ) : (
             <span
@@ -82,23 +78,23 @@ export default function ProjectContentCard(props: ProjectContentProps) {
       return (
         <>
           {props.editMode ? (
-        
-              <TextInput
-                label={"Project Link"}
-                placeholder="Enter a project link URL"
-                value={props.content.content}
-                leftSection={<IconLink />}
-              />
+            <TextInput
+              label={"Project Link"}
+              placeholder="Enter a project link URL"
+              value={props.content.content}
+              leftSection={<IconLink />}
+              onChange={handleTextChange}
+            />
           ) : (
-            <div
-            
-              className="flex flex-row items-center justify-start ml-4 md:ml-12 sm:w-3/4">
+            <div className="flex flex-row items-center justify-start ml-4 md:ml-12 sm:w-3/4">
               <Tag
                 bg_color="bg-blue-100"
                 txt_color="text-blue-600"
                 hover_bg_color="hover:bg-blue-300">
                 <RedirectLink href={props.content.content}>
-                  <button className="text-sm cursor-pointer lg:text-lg">PROJECT LINK DEMO</button>
+                  <button className="text-sm cursor-pointer lg:text-lg">
+                    PROJECT LINK DEMO
+                  </button>
                 </RedirectLink>
               </Tag>
             </div>
@@ -119,13 +115,13 @@ export default function ProjectContentCard(props: ProjectContentProps) {
             />
           ) : (
             <div
-              className="flex flex-col items-start justify-start ml-4 md:ml-8 sm:w-3/4">
+              className="flex flex-col items-start justify-start w-full h-full ml-4 md:ml-8 xl:w-3/4">
               <Image
                 alt={`${props.projectName}`}
                 src={props.content.content}
-                width={400}
-                height={400}
-                className="h-auto rounded-xl"
+                width={500}
+                height={500}
+                className="w-auto h-full rounded-xl"
               />
             </div>
           )}
@@ -142,6 +138,7 @@ export default function ProjectContentCard(props: ProjectContentProps) {
                 placeholder="Enter a project heading"
                 value={props.content.content}
                 leftSection={<IconHeading />}
+                onChange={handleTextChange}
               />
           ) : (
             <span
@@ -167,7 +164,7 @@ export default function ProjectContentCard(props: ProjectContentProps) {
               />
           ) : (
             <div
-              className="w-full md:w-3/4 lg:w-1/2">
+              className="w-full xl:w-3/4">
               <PDF src={props.content.content} />
             </div>
           )}

@@ -23,6 +23,7 @@ import { Project, ProjectFormValues, ProjectType } from "../types/project";
 import { useSession } from "next-auth/react";
 
 import dynamic from "next/dynamic";
+import { Toaster, toast } from "react-hot-toast";
 
 const ProjectForm = dynamic(
   () => import("@/components/ProjectForm"),
@@ -30,7 +31,7 @@ const ProjectForm = dynamic(
 );
 
 const LoadingAnimation = dynamic(
-  () => import("../components/LoadingAnimation"),
+  () => import("@/components/LoadingAnimation"),
   { ssr: false }
 );
 
@@ -96,6 +97,23 @@ export default function Home() {
     });
   }
 
+  function handleProjectUpdate(updatedProject: Project) {
+    setFilteredProjects((prevProjects) => {
+      const existingIndex = prevProjects.findIndex(
+        (p) => p.id === updatedProject.id
+      );
+      if (existingIndex !== -1) {
+        return [
+          ...prevProjects.slice(0, existingIndex),
+          updatedProject,
+          ...prevProjects.slice(existingIndex + 1),
+        ];
+      } else {
+        return [...prevProjects, updatedProject];
+      }
+    });
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -151,6 +169,7 @@ export default function Home() {
 
   return (
     <>
+      <Toaster position="bottom-right" reverseOrder={false} />
       {isLoading ? (
         <LoadingAnimation></LoadingAnimation>
       ) : (
@@ -216,11 +235,10 @@ export default function Home() {
                   </Tag>
                 </div>
               </div>
-              <div className="flex flex-row items-center justify-between gap-1 text-lg font-semibold whitespace-nowrap sm:gap-3 lg:flex-col xl:flex-row text-zinc-700">
+              <div className="flex flex-row items-center justify-between gap-1 text-lg font-semibold whitespace-nowrap sm:gap-3 lg:gap-0 xl:gap-3 lg:flex-col xl:flex-row text-zinc-700">
                 <span className="flex-grow font-bold text-zinc-800">
                   🌵 PHX, AZ
                 </span>
-                <Clock timeZone="America/Phoenix" />
               </div>
             </div>
             <div className="flex flex-row justify-between w-full">
@@ -294,7 +312,6 @@ export default function Home() {
                     <span className="text-sm">Add Work | Project</span>
                   </button>
                 </Tag>
-                
               </>
             )}
           </div>
@@ -401,7 +418,14 @@ export default function Home() {
         </div>
       )}
 
-      <ProjectForm projectModalOpen={projectModalOpen} setProjectModalOpen={setProjectModalOpen} data={projectFormData} formType={projectFormType} projectId={editingProjectID}/>
+      <ProjectForm
+        projectModalOpen={projectModalOpen}
+        setProjectModalOpen={setProjectModalOpen}
+        projectUpdate={handleProjectUpdate}
+        data={projectFormData}
+        formType={projectFormType}
+        projectId={editingProjectID}
+      />
     </>
   );
 }

@@ -12,11 +12,12 @@ import Checkbox from "./inputs/Checkbox";
 import FileInput from "./inputs/FileInput";
 
 import { handleUpload } from "@/lib/inputs/upload";
-import { ProjectFormValues, ProjectType } from "@/types/project";
+import { Project, ProjectFormValues, ProjectType } from "@/types/project";
 import { useEffect, useState } from "react";
-import { IconCircleCheckFilled, IconCircleXFilled } from "@tabler/icons-react";
+import { IconCircleCheckFilled, IconCircleXFilled, IconBrandGithubFilled, IconCalendar, IconFile, IconPhoto, IconAbc, IconHeading  } from "@tabler/icons-react";
 import Tag from "./Tag";
 import dayjs from "dayjs";
+import { Toaster, toast } from "react-hot-toast";
 
 const typeOptions = [
   "All",
@@ -30,6 +31,7 @@ const typeOptions = [
 type ProjectFormProps = {
   projectModalOpen: boolean;
   setProjectModalOpen: (open: boolean) => void;
+  projectUpdate: (project: Project) => void;
   data: ProjectFormValues;
   formTitle?: string;
   formDescription?: string;
@@ -138,8 +140,12 @@ export default function ProjectForm(props: ProjectFormProps) {
 
         const updatedProject = await updateResponse.json();
         if (!updateResponse.ok) {
+          toast.error("Failed to update project");
           throw new Error("Failed to update project");
         }
+        toast.success("Project Updated!");
+        console.log(updatedProject.project)
+        props.projectUpdate(updatedProject);
       } else if (props.formType === "create") {
         const createResponse = await fetch("/api/project/create", {
           method: "POST",
@@ -150,9 +156,12 @@ export default function ProjectForm(props: ProjectFormProps) {
         });
 
         const createdProject = await createResponse.json();
+        props.projectUpdate(createdProject.project);
         if (!createResponse.ok) {
+          toast.error("Failed to create project");
           throw new Error("Failed to create project");
         }
+        toast.success("Project Created!");
       }
 
       props.setProjectModalOpen(false);
@@ -162,6 +171,8 @@ export default function ProjectForm(props: ProjectFormProps) {
   }
 
   return (
+    <>
+    <Toaster position="bottom-right" reverseOrder={false} />
     <Modal
       isOpen={props.projectModalOpen}
       setIsOpen={props.setProjectModalOpen}>
@@ -186,6 +197,8 @@ export default function ProjectForm(props: ProjectFormProps) {
               <TextInput
                 label="Project Name"
                 placeholder="Enter a name"
+                withAsterisk
+                leftSection={<IconHeading size={16} />}
                 {...form.getInputProps("projectName")}
               />
             </div>
@@ -193,13 +206,24 @@ export default function ProjectForm(props: ProjectFormProps) {
               <TextArea
                 label="Project Description"
                 placeholder="Enter a description"
+                withAsterisk
+                leftSection={<IconAbc size={16} />}
                 {...form.getInputProps("projectDescription")}
+              />
+            </div>
+            <div className="w-full p-4 pb-0">
+              <TextInput
+                label="Project Github"
+                placeholder="Enter a github link"
+                leftSection={<IconBrandGithubFilled size={16} />}
+                {...form.getInputProps("projectGithub")}
               />
             </div>
             <div className="w-full p-4 pb-0">
               <MultiSelect
                 label="Project Types"
                 placeholder="Select Types"
+                withAsterisk
                 data={typeOptions.filter((c) => c !== "All")}
                 {...form.getInputProps("projectTypes")}
               />
@@ -208,6 +232,7 @@ export default function ProjectForm(props: ProjectFormProps) {
               <DateInput
                 label="Project Start"
                 placeholder="Select a Start Date"
+                leftSection={<IconCalendar size={16} />}
                 {...form.getInputProps("projectStart")}
               />
             </div>
@@ -216,6 +241,7 @@ export default function ProjectForm(props: ProjectFormProps) {
                 <DateInput
                   label="Project End"
                   placeholder="Select a End Date"
+                  leftSection={<IconCalendar size={16} />}
                   {...form.getInputProps("projectEnd")}
                 />
               </div>
@@ -231,6 +257,8 @@ export default function ProjectForm(props: ProjectFormProps) {
             <div className="w-full p-4 pb-0 ">
               <FileInput
                 fileType="image/*"
+                withAsterisk
+                leftSection={<IconPhoto size={16} />}
                 file={
                   typeof props.data.projectFile === "string"
                     ? props.data.projectFile
@@ -287,5 +315,6 @@ export default function ProjectForm(props: ProjectFormProps) {
         </div>
       </form>
     </Modal>
+    </>
   );
 }

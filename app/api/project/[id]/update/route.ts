@@ -8,7 +8,11 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
 
-    console.log(params.id)
+  const session = await getServerSession(NextOptions);
+  if (session?.user.role !== "ADMIN") {
+    return NextResponse.redirect("/api/auth/signin");
+  }
+  
   const reqBody = await req.json();
 
   const data = {
@@ -31,15 +35,11 @@ export async function PUT(
       : null,
   };
 
-  const session = await getServerSession(NextOptions);
-  if (session?.user.role !== "ADMIN") {
-    return NextResponse.redirect("/api/auth/signin");
-  }
 
   const project = await prisma.project.update({
     where: { id: parseInt(params.id) },
     data: data,
   });
 
-  return NextResponse.json({ project, message: "Project updated" });
+  return NextResponse.json(project);
 }

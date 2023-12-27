@@ -33,5 +33,5 @@ export async function POST(req: Request) {
     data,
   });
 
-  return NextResponse.json({ project, message: "Project created" });
+  return NextResponse.json(project);
 }
