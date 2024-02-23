@@ -53,7 +53,7 @@ export default function ProjectCard<T extends { toString(): string }>(
   return (
     <div
       
-      className="relative flex flex-col items-center justify-center w-full h-full max-h-full gap-24 bg-white border max-w-fit rounded-3xl">
+      className="relative flex flex-col items-center justify-center w-full h-full max-w-full max-h-full gap-24 bg-white border rounded-3xl">
       <div className="absolute z-10 flex flex-col items-start justify-start gap-2 text-xs font-medium top-4 left-4 text-zinc-500">
         <Tag bg_color="bg-white shadow">
           <div className="flex flex-row gap-2">

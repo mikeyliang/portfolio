@@ -17,21 +17,23 @@ export async function POST(req: Request) {
     img: reqBody.projectFile,
     github: reqBody.githubLink ?? null,
     projectStartYear: reqBody.projectStart
-      ? parseInt(reqBody.projectStart.split("/")[0])
-      : null,
-    projectStartMonth: reqBody.projectStart
       ? parseInt(reqBody.projectStart.split("/")[1])
       : null,
+    projectStartMonth: reqBody.projectStart
+      ? parseInt(reqBody.projectStart.split("/")[0])
+      : null,
     projectEndYear: reqBody.projectEnd
-      ? parseInt(reqBody.projectEnd.split("/")[0])
+      ? parseInt(reqBody.projectEnd.split("/")[1])
       : null,
     projectEndMonth:
-      reqBody.projectEnd ? parseInt(reqBody.projectEnd.split("/")[1]) : null,
+      reqBody.projectEnd ? parseInt(reqBody.projectEnd.split("/")[0]) : null,
   };
 
   const project = await prisma.project.create({
     data,
   });
+
+  console.log(project);
 
   return NextResponse.json(project);
 }

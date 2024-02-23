@@ -5,9 +5,6 @@ import { Group, Category, Attribute } from "./enums.d";
 // project
 export type Project = PrismaProjectType;
 export type ProjectContent = PrismaProjectContentType;
-export type EditProjectContent = Omit<ProjectContent, "content"> & {
-  content: string | File;
-};
 
 
 // TODO: fix tag and projecttypes for Tag component. using <T>

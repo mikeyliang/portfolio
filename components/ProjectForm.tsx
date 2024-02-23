@@ -124,6 +124,7 @@ export default function ProjectForm(props: ProjectFormProps) {
         ? dayjs(values.projectEnd).format("MM/YYYY")
         : null;
 
+      console.log(formattedStartDate, formattedEndDate)
       values.projectStart = formattedStartDate;
       values.projectEnd = formattedEndDate;
       
@@ -144,7 +145,6 @@ export default function ProjectForm(props: ProjectFormProps) {
           throw new Error("Failed to update project");
         }
         toast.success("Project Updated!");
-        console.log(updatedProject.project)
         props.projectUpdate(updatedProject);
       } else if (props.formType === "create") {
         const createResponse = await fetch("/api/project/create", {

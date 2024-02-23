@@ -204,6 +204,9 @@ export default function EditProjectPage({
   }
 
   useEffect(() => {
+    if (projectContent.length == 0) {
+      setAddContentPopupOrder(0);
+    }
     setTempProjectContent(projectContent);
   }, [projectContent]);
 
@@ -225,6 +228,8 @@ export default function EditProjectPage({
     };
     fetchProjectData();
   }, []);
+
+  console.log(tempProjectContent);
 
 
   return (
@@ -271,11 +276,16 @@ export default function EditProjectPage({
               </div>
               <div className="flex flex-col items-start justify-center gap-4 md:items-end md:flex-row">
                 <span className="text-3xl font-extrabold md:text-4xl sm:text-3xl xl:text-5xl text-zinc-700">
-                  {`${project?.type.includes("Art") || project?.type.includes("Design") ? "🎨" : ""}${
-                    project?.type.includes("Mechanical") ? "⚙️" : ""
-                  } ${project?.type.includes("Electrical") ? "🔌" : ""} ${
-                    project?.type.includes("Software") ? "👨‍💻" : ""
-                  }   ${project?.name}`}
+                  {`${
+                    project?.type.includes("Art") ||
+                    project?.type.includes("Design")
+                      ? "🎨"
+                      : ""
+                  }${project?.type.includes("Mechanical") ? "⚙️" : ""} ${
+                    project?.type.includes("Electrical") ? "🔌" : ""
+                  } ${project?.type.includes("Software") ? "👨‍💻" : ""}   ${
+                    project?.name
+                  }`}
                 </span>
 
                 {project?.github && (
@@ -350,6 +360,14 @@ export default function EditProjectPage({
           {editingMode && session?.user.role == "ADMIN" ? (
             <>
               <div className="flex flex-col items-start justify-center gap-12 md:gap-16">
+                {project && tempProjectContent.length == 0  && (
+                  <AddContentPopup
+                    onAddContent={handleAddNewContent}
+                    onCancel={handleCancelAddContent}
+                    project={project}
+                    newOrder={0}
+                  />
+                )}
                 {project?.name &&
                   tempProjectContent?.map((content, index) => (
                     <>
@@ -414,7 +432,7 @@ export default function EditProjectPage({
                         <AddContentPopup
                           onAddContent={handleAddNewContent}
                           onCancel={handleCancelAddContent}
-                          projectName={project.name}
+                          project={project}
                           newOrder={addContentPopupOrder + 1}
                         />
                       )}
@@ -478,7 +496,7 @@ export default function EditProjectPage({
 }
 
 type AddContentPopupProps = {
-  projectName: string;
+  project: Project;
   onAddContent: (newContent: ProjectContent) => void;
   onCancel: () => void;
   newOrder: number;
@@ -541,6 +559,8 @@ function AddContentPopup(props: AddContentPopupProps) {
     props.onCancel();
   }
 
+  
+
   return (
     <div className="flex flex-col items-start justify-center w-full gap-8 p-8 bg-white border shadow-lg rounded-2xl top-20 lg:w-3/4 xl:x-2/3">
       <h3 className="text-lg font-bold ">Add New Content</h3>
@@ -562,17 +582,17 @@ function AddContentPopup(props: AddContentPopupProps) {
         <div className="w-full">
           <ProjectContentCard
             content={{
-              id: 0,
+              id: Date.now(),
               order: props.newOrder,
               contentType: selectedContentType,
               content: newContent.content,
-              projectId: 0,
+              projectId: props.project.id,
             }}
             onChange={(order, updatedContent) =>
               handleContentChange(order, updatedContent)
             }
             editMode={true}
-            projectName={props.projectName}
+            projectName={props.project.name}
           />
         </div>
       )}

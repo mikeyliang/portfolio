@@ -331,7 +331,7 @@ export default function Home() {
                     setEditingProjectID={setEditingProjectID}>
                     <a
                       key={project.name}
-                      className={`w-full col-span-1 cursor-pointer`}
+                      className={`w-full col-span-1 cursor-pointer h-full`}
                       href={`/project/${project.id}`}>
                       <style jsx>
                         {`
@@ -397,17 +397,18 @@ export default function Home() {
                           project.type.some((type) => type == "Art")
                             ? "vignette_art"
                             : "vignette"
-                        } h-full flex-col justify-center items-center shadow`}>
+                        } h-full shadow`}>
                         {project.img && (
-                          <div className="flex flex-col items-center justify-center h-full">
+        <div className="flex flex-col justify-center h-full">
                             <Image
-                              className="object-cover rounded-4xl"
-                              width={1000}
-                              height={1000}
+                              className="w-full h-auto "
+                              width={800}
+                              height={800}
                               src={project.img}
                               alt={project.name}
+                             
                             />
-                          </div>
+              </div>
                         )}
                       </div>
                     </a>
